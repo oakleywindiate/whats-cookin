@@ -3,32 +3,30 @@ import RecipeRepository from '../src/classes/RecipeRepository';
 
 describe('Recipe', () => {
 
-  let recipeRepository1;
-  let recipe1;
-  let recipe2;
-  let recipe3;
+  let recipeRepository;
+  let recipeData;
 
   beforeEach(() => {
 
-    recipe1 = {
+  recipeData = [
+    {
       id: 1,
       tag: ["foo", "baz", "bat"],
-      name: "Pizza"
-    };
-
-    recipe2 = {
+      name: ["Pizza"]
+    },
+    {
       id: 2,
       tag: ["hoop", "baz", "foo"],
-      name: "Pasta"
-    };
-
-    recipe3 = {
+      name: ["Pasta"]
+    },
+    {
       id: 3,
       tag: ["hoop", "baz", "goop"],
-      name: "Salad"
-    };
+      name: ["Salad"]
+    }
+  ]
 
-    recipeRepository1 = new RecipeRepository(recipe1)
+    recipeRepository = new RecipeRepository(recipeData);
 
   });
 
@@ -38,12 +36,19 @@ describe('Recipe', () => {
   });
 
   it('should be an instance of a RecipeRepository', () => {
-    expect(recipeRepository1).to.be.an.instanceof(RecipeRepository);
+    expect(recipeRepository).to.be.an.instanceof(RecipeRepository);
   });
 
-  it('should be able to take in a recipe', () => {
-    expect(recipeRepository1.recipe).to.equal(recipe1);
-    // expect(round2.deck).to.equal(deck2);
+  it('should be able to take in a recipe data set', () => {
+    expect(recipeRepository.recipeData).to.equal(recipeData);
+  })
+
+  it('should be able to filter a recipe by tag and return recipe', () => {
+    expect(recipeRepository.filterTag("hoop")).to.deep.equal([
+      { id: 2, tag: [ 'hoop', 'baz', 'foo' ], name: [ 'Pasta' ] },
+      { id: 3, tag: [ 'hoop', 'baz', 'goop' ], name: [ 'Salad' ] }
+    ]);
+    // console.log(recipeRepository.recipeData.filter(recipe =>))
   })
 
 
