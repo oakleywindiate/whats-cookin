@@ -8,10 +8,11 @@ class RecipeRepository {
     return filterRecipeByTag
   }
 
-  filterName() {
-
+  filterName(name) {
+    const filterRecipeByName = this.recipeData.filter(recipe => recipe.name.includes(name))
+    return filterRecipeByName
   }
-  
+
 }
 
 export default RecipeRepository;
