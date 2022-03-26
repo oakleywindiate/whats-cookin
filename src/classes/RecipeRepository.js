@@ -1,13 +1,17 @@
 class RecipeRepository {
-  constructor(recipe) {
-    this.recipe = recipe;
+  constructor(recipeData) {
+    this.recipeData = recipeData;
   }
-  filterTag() {
 
+  filterTag(tag) {
+    const filterRecipeByTag = this.recipeData.filter(recipe => recipe.tag.includes(tag))
+    return filterRecipeByTag
   }
+
   filterName() {
 
   }
+  
 }
 
 export default RecipeRepository;
