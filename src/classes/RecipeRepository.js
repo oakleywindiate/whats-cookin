@@ -1,7 +1,12 @@
 class RecipeRepository {
-  constructor() {
+  constructor(recipe) {
+    this.recipe = recipe;
+  }
+  filterTag() {
 
-    // One class to get you started!
+  }
+  filterName() {
+
   }
 }
 
