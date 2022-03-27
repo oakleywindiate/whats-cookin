@@ -3,17 +3,18 @@ class Recipe {
     this.recipe = recipe;
   }
 
-  getIngredient(id) {
+  getIngredient(ingredientsData) {
+    const findIngredient = this.recipe.ingredients.map(ingredient => ingredientsData.getIngredientName(ingredient.id));
+    return findIngredient
+    };
 
-  }
-  // input - we need to pass in ingredient array
-  // output - return array of ingredient names from ingredientData
-    // set up / how:
-      // since we have access to ingredientData by passing it in
-      // ingredient
-  // return the names of ingredients
-  // match the ids from recipe object to the ingredients data array to pull the name of ingredient needed
-
+  calculateCost(ingredientsData) {
+    const getCost = this.recipe.ingredients.reduce((acc, ingredient) => {
+      acc += ingredient.quantity.amount * ingredientsData.getEstimatedCost(ingredient.id)
+      return acc
+    }, 0)
+    return getCost
+  };
 };
 
 export default Recipe;
