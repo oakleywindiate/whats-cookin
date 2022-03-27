@@ -113,12 +113,13 @@ describe('Recipe', () => {
 
   it('should be able to take in a recipe object', () => {
     expect(recipe.recipe).to.equal(recipe1);
+  });
+
+  it('should be able to return the names of ingredients of a recipe', () => {
+    expect(recipe.getIngredient(ingredient1)).to.deep.equal(['wheat flour', 'bicarbonate of soda']);
+  });
+
+  it('should be able to calculate the cost of recipe', () => {
+    expect(recipe.calculateCost(ingredient1)).to.equal(1959);
   })
-
-  
-
-  it.skip('should be able to return the names of ingredients of a recipe', () => {
-    expect(recipe.getIngredient()).to.deep.equal(['wheat flour', 'bicarbonate of soda']);
-  })
-
-})
+});
