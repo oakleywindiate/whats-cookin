@@ -52,4 +52,8 @@ describe('Ingredient', () => {
     expect(ingredient1.getIngredientName(3)).to.deep.equal("eggs");
   })
 
+  it('should be able to return the estimated cost of ingredient', () => {
+    expect(ingredient1.getEstimatedCost(2)).to.deep.equal(582);
+    expect(ingredient1.getEstimatedCost(3)).to.deep.equal(472);
+  })
 });
