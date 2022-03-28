@@ -33,6 +33,16 @@ describe('Recipe', () => {
               unit: 'tsp'
             }
           }
+        ],
+        instructions: [
+          {
+            "instruction": "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+            "number": 1
+          },
+          {
+            "instruction": "Add egg and vanilla and mix until combined.",
+            "number": 2
+          }
         ]
       };
     recipe2 =
@@ -48,6 +58,12 @@ describe('Recipe', () => {
               unit: 'tsp'
             }
           }
+        ],
+        instructions: [
+          {
+            "instruction": "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+            "number": 1
+          }
         ]
       };
     recipe3 =
@@ -62,6 +78,12 @@ describe('Recipe', () => {
               amount: 2,
               unit: 'Tbsp'
             }
+          }
+        ],
+        instructions: [
+          {
+            "instruction": "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+            "number": 1
           }
         ]
       };
@@ -121,5 +143,18 @@ describe('Recipe', () => {
 
   it('should be able to calculate the cost of recipe', () => {
     expect(recipe.calculateCost(ingredient1)).to.equal(1959);
+  })
+
+  it('should be able to return the instructions of a recipe', () => {
+    expect(recipe.getDirections()).to.deep.equal([
+  {
+    instruction: 'In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.',
+    number: 1
+  },
+  {
+    instruction: 'Add egg and vanilla and mix until combined.',
+    number: 2
+  }
+]);
   })
 });
