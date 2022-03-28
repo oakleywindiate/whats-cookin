@@ -15,6 +15,12 @@ class Recipe {
     }, 0)
     return getCost
   };
+
+  getDirections() {
+    //input:
+    //output:
+    return this.recipe.instructions
+  }
 };
 
 export default Recipe;
