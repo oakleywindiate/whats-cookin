@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>Whats Cookin</title>
   </head>
   <body>
+    <nav>
     <h1>Whats Cookin</h1>
+    <section class="search-bar-container" id="searchBarContainer">
+      <div class="search-bar">
+        <input type="text" placeholder="What do you want to cook?">
+      </div>
+    </section>
+    <section class="favorite-recipes" id="favoriteRecipes">
+      <button class="favorites-button" id="favoritesButton">Favorite Recipies</button>
+    </section>
+    </nav>
+    <main>
+      <section class="featured-recipe-container" id="featuredRecipeContainer">
+        <img>
+        <section class="featured-recipe" id="featuredRecipe">
+          <h2 class="featured-recipe-text" id="featuredRecipeText">Featured Recipe</h2>
+        </section>
+      </section>
+      <section class="recipe-list-container" id="recipeListContainer">
+        <section class="recipe-list" id="recipeList">
+          <button>Pasta</button>
+          <button>Pizza</button>
+          <button>Chicken</button>
+        </section>
+      </section>
+    </main>
   </body>
   <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
