@@ -13,4 +13,13 @@ import './images/turing-logo.png'
 
 
 console.log('Hello world');
-// console.log(usersData)
+
+let ingredientList = new Ingredient(ingredientsData);
+let recipeList = new RecipeRepository(recipeData);
+let recipe1 = new Recipe(recipeList.recipeData[0])
+
+
+// console.log(recipeList.displayNames())
+// console.log(recipeList)
+// console.log(recipeList.filterName("Baked Stuffed Artichokes"))
+// console.log(recipeList.length)

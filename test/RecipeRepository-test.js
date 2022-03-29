@@ -10,22 +10,22 @@ describe('RecipeRepository', () => {
   recipeData = [
     {
       id: 1,
-      tag: ['foo', 'baz', 'bat'],
+      tags: ['foo', 'baz', 'bat'],
       name: 'Pizza'
     },
     {
       id: 2,
-      tag: ['hoop', 'baz', 'foo'],
+      tags: ['hoop', 'baz', 'foo'],
       name: 'Pasta'
     },
     {
       id: 3,
-      tag: ['hoop', 'baz', 'goop'],
+      tags: ['hoop', 'baz', 'goop'],
       name: 'Salad'
     },
     {
       id: 4,
-      tag: ['baz', 'tee', 'goop'],
+      tags: ['baz', 'tee', 'goop'],
       name: 'Pineapple Pizza'
     }
   ]
@@ -48,9 +48,9 @@ describe('RecipeRepository', () => {
   })
 
   it('should be able to filter a recipe by tag and return recipe', () => {
-    expect(recipeRepository.filterTag('hoop')).to.deep.equal([
-      { id: 2, tag: [ 'hoop', 'baz', 'foo' ], name: 'Pasta' },
-      { id: 3, tag: [ 'hoop', 'baz', 'goop' ], name:'Salad'}
+    expect(recipeRepository.filterTags('hoop')).to.deep.equal([
+      { id: 2, tags: [ 'hoop', 'baz', 'foo' ], name: 'Pasta' },
+      { id: 3, tags: [ 'hoop', 'baz', 'goop' ], name:'Salad'}
     ]);
   })
 
@@ -58,12 +58,12 @@ describe('RecipeRepository', () => {
     expect(recipeRepository.filterName('Pizza')).to.deep.equal([
       {
         id: 1,
-        tag: ['foo', 'baz', 'bat'],
+        tags: ['foo', 'baz', 'bat'],
         name: 'Pizza'
       },
       {
         id: 4,
-        tag: ['baz', 'tee', 'goop'],
+        tags: ['baz', 'tee', 'goop'],
         name: 'Pineapple Pizza'
       }
     ]);
