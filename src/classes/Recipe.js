@@ -17,8 +17,6 @@ class Recipe {
   };
 
   getDirections() {
-    //input:
-    //output:
     return this.recipe.instructions
   }
 };
