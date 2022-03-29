@@ -3,14 +3,7 @@ import Ingredient from '../src/classes/Ingredient';
 
 
 describe('Ingredient', () => {
-  // variables
-  // let recipe;
-  // let recipe1;
-  // let recipe2;
-  // let recipe3;
-  // let recipe4;
-  let ingredientsData;
-  let ingredient1;
+  let ingredientsData, ingredient1;
 
   beforeEach(() => {
     ingredientsData = [

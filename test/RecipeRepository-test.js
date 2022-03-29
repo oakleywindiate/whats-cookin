@@ -3,8 +3,7 @@ import RecipeRepository from '../src/classes/RecipeRepository';
 
 describe('RecipeRepository', () => {
 
-  let recipeRepository;
-  let recipeData;
+  let recipeRepository, recipeData;
 
   beforeEach(() => {
 
@@ -58,16 +57,20 @@ describe('RecipeRepository', () => {
   it('should be able to filter a recipe by name and return recipe', () => {
     expect(recipeRepository.filterName('Pizza')).to.deep.equal([
       {
-      id: 1,
-      tag: ['foo', 'baz', 'bat'],
-      name: 'Pizza'
-    },
-    {
-      id: 4,
-      tag: ['baz', 'tee', 'goop'],
-      name: 'Pineapple Pizza'
-    }
-  ]);
+        id: 1,
+        tag: ['foo', 'baz', 'bat'],
+        name: 'Pizza'
+      },
+      {
+        id: 4,
+        tag: ['baz', 'tee', 'goop'],
+        name: 'Pineapple Pizza'
+      }
+    ]);
+  })
+
+  it('should be able to return a list of all the recipes', () => {
+    expect(recipeRepository.displayNames()).to.deep.equal(['Pizza', 'Pasta', 'Salad', 'Pineapple Pizza']);
   })
 
 })
