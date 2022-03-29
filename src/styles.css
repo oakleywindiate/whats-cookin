@@ -1,3 +1,42 @@
 body {
   background-color: blueviolet;
 }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+ width: 50vw;
+ height: 5vh;
+
+}
+
+.search-bar {
+    margin-top: 8px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.featured-recipe-container {
+  padding: 10%;
+}
+
+.recipe-list-container {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipe-list-button {
+  width: 30vw;
+  height: 30vh;
+}
