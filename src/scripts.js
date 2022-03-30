@@ -11,6 +11,7 @@ import Ingredient from './classes/Ingredient';
 import './images/turing-logo.png'
 
 let recipeButtonList = document.querySelector('.recipe-list')
+let viewRecipe = document.querySelector('.display-recipe-object')
 
 console.log('Hello world');
 
@@ -41,11 +42,25 @@ const findRecipeId = (id) => {
     let stringifyId = recipe.recipe.id.toString()
     return stringifyId === id
   })
-  console.log(filterRecipe)
+  // console.log(filterRecipe)
   return filterRecipe
 }
 
-// displayRecipe()
+const displayRecipe = (id) => {
+  const recipeInfo = findRecipeId(id);
+  const getInstructions = recipeInfo.recipe.instructions.map(instruction => {
+    return instruction.instruction;
+  })
+  viewRecipe.innerHTML += `
+  <h3 class="display-recipe-name">${recipeInfo.recipe.name}</h3>
+  <p class="instructions">${getInstructions}</p>
+  <p class="ingredients">${recipeInfo.getIngredient(ingredientList)}</p>
+  <p class="cost">${recipeInfo.calculateCost(ingredientList)}</p>
+  `
+  console.log(recipeInfo.recipe.instructions);
+}
+// refactor to create get instructions function out of this function and call it here
+
 // should be able to view:
 // directions
 // ingredients needed
@@ -53,7 +68,7 @@ const findRecipeId = (id) => {
 
 // directions dot notation Recipe
 // ingredients -- Recipe(ingredientList)
-// 
+//
 // const show = () => {
 //   .classList.toggle('hidden')
 // }
@@ -64,5 +79,5 @@ window.addEventListener('load', createRecipeList);
 
 recipeButtonList.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
-  findRecipeId(targetId)
+  displayRecipe(targetId)
 })
