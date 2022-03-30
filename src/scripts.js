@@ -36,19 +36,25 @@ const createRecipeList = () => {
   })
 };
 
-// UPDATES: conditional checking id clicks and logs but will not
-// identify single matching id
-
-const displayRecipe = (id) => {
-  recipeList.recipe.find(recipe => {
-    console.log("find", recipe)
-
+const findRecipeId = (id) => {
+  const filterRecipe = recipeList.recipe.find(recipe => {
+    let stringifyId = recipe.recipe.id.toString()
+    return stringifyId === id
   })
-  console.log("id", id)
-  console.log("recipe id", recipeList.recipe.id)
+  console.log(filterRecipe)
+  return filterRecipe
 }
 
 // displayRecipe()
+// should be able to view:
+// directions
+// ingredients needed
+// total cost
+
+// directions dot notation Recipe
+// ingredients -- Recipe(ingredientList)
+
+
 
 // -------------- EVENT LISTENERS ----------------- //
 
@@ -56,6 +62,5 @@ window.addEventListener('load', createRecipeList);
 
 recipeButtonList.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
-  displayRecipe(targetId)
-  console.log("event", recipeList.recipe.id)
+  findRecipeId(targetId)
 })
