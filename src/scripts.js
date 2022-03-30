@@ -53,8 +53,10 @@ const findRecipeId = (id) => {
 
 // directions dot notation Recipe
 // ingredients -- Recipe(ingredientList)
-
-
+// 
+// const show = () => {
+//   .classList.toggle('hidden')
+// }
 
 // -------------- EVENT LISTENERS ----------------- //
 
