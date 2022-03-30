@@ -67,10 +67,22 @@ describe('RecipeRepository', () => {
         name: 'Pineapple Pizza'
       }
     ]);
-  })
+  });
 
   it('should be able to return a list of all the recipes', () => {
     expect(recipeRepository.displayNames()).to.deep.equal(['Pizza', 'Pasta', 'Salad', 'Pineapple Pizza']);
-  })
+  });
+
+  it('should be able to return a list of all the recipes', () => {
+    console.log("recipeRepository", recipeRepository.recipeData)
+    console.log("recipe", recipeRepository.recipe)
+    expect(recipeRepository.createRecipes()).to.deep.equal([
+  { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } },
+  { recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } },
+  { recipe: { id: 3, tags: ['hoop', 'baz', 'goop'], name: 'Salad' } },
+  { recipe: { id: 4, tags: ['baz', 'tee', 'goop'], name: 'Pineapple Pizza' } }
+]);
+  });
+
 
 })
