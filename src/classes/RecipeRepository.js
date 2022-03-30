@@ -1,6 +1,9 @@
+import Recipe from './Recipe'
+
 class RecipeRepository {
   constructor(recipeData) {
     this.recipeData = recipeData;
+    this.recipe = this.createRecipes();
   };
 
   filterTags(tag) {
@@ -18,11 +21,13 @@ class RecipeRepository {
     return displayRecipeName
   };
 
-  //As a user, I should be able to view a list of all recipes.
-    //display all the recipes from RecipeRepository
-    //just the names
-
-
+  createRecipes() {
+    const mapRecipe = this.recipeData.map(recipe => {
+      const createClass = new Recipe(recipe)
+      return createClass
+    });
+    return mapRecipe
+  };
 
 };
 
