@@ -16,31 +16,46 @@ console.log('Hello world');
 
 let ingredientList = new Ingredient(ingredientsData);
 let recipeList = new RecipeRepository(recipeData);
-let recipe1 = new Recipe(recipeList.recipeData[0])
+// let recipe1 = new Recipe(recipeList.recipeData[0])
 
-
+console.log("recipeData", recipeList.recipeData)
 
 // console.log(recipeList.displayNames())
 // console.log(recipeList)
 // console.log(recipeList.filterName("Baked Stuffed Artichokes"))
 // console.log(recipeList.length)
 
-// view list of all Recipies
-// access recipe RecipeRepository
-// iterate through array
-// make a new button for each recipe
-
-
+// click on recipe for more information:
+// crate event listener that listens for click
+// function that uses logged id to do something
 
 
 const createRecipeList = () => {
-  const displayNames = recipeList.displayNames()
-  displayNames.forEach(name => {
-    console.log(name)
-    recipeButtonList.innerHTML += `<button class="recipe-list-button">${name}</button>`
+  recipeList.recipe.forEach(recipe => {
+    recipeButtonList.innerHTML += `<button class="recipe-list-button" id="${recipe.recipe.id}">${recipe.recipe.name}</button>`
   })
+};
+
+// UPDATES: conditional checking id clicks and logs but will not
+// identify single matching id
+
+const displayRecipe = (id) => {
+  recipeList.recipe.find(recipe => {
+    console.log("find", recipe)
+
+  })
+  console.log("id", id)
+  console.log("recipe id", recipeList.recipe.id)
 }
+
+// displayRecipe()
 
 // -------------- EVENT LISTENERS ----------------- //
 
-window.addEventListener('load', createRecipeList)
+window.addEventListener('load', createRecipeList);
+
+recipeButtonList.addEventListener('click', function(e) {
+  let targetId = e.target.getAttribute('id')
+  displayRecipe(targetId)
+  console.log("event", recipeList.recipe.id)
+})
