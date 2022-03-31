@@ -13,7 +13,8 @@ import './images/turing-logo.png'
 let recipeButtonList = document.querySelector('.recipe-list')
 let viewRecipe = document.querySelector('.display-recipe-object')
 let searchInput = document.querySelector('.search-input')
-var inputValue = document.querySelector('.search-input').value;
+let inputValue = document.querySelector('.search-input').value;
+let searchedRecipes = document.querySelector('.display-searched-recipes')
 
 console.log('Hello world');
 
@@ -65,16 +66,17 @@ const displayRecipe = (id) => {
 const searchByTagOrName = (input) => {
   const searchTag = recipeList.filterTags(input);
   const searchName = recipeList.filterName(input);
-  const searches = recipeList.recipe.reduce((acc, search) => {
-    if (searchTag) {
-      // acc.push(search)
-      console.log(search)
-    }
-  }, [])
-  // if (searchTag) {
-  //   console.log('rachel')
-  //   alertError();
-  // }
+
+  const getRecipeByTag = searchTag.map(taggedRecipe => {
+    searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${taggedRecipe.id}">${taggedRecipe.name}</button>`
+  })
+  const getRecipeByName = searchName.map(namedRecipe => {
+    searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${namedRecipe.id}">${namedRecipe.name}</button>`
+  })
+
+  //if searchTag is truthy, then we inject HTML based on that array
+  //if searchName is truthy, inject HMTL based on that one
+  // console.log(searchName, searchTag)
 }
 
 // const alertError = () => {
@@ -95,6 +97,12 @@ recipeButtonList.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
   displayRecipe(targetId)
 })
+
+searchedRecipes.addEventListener('click', function(e) {
+  let targetId = e.target.getAttribute('id')
+  displayRecipe(targetId)
+})
+
 
 searchInput.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
