@@ -12,6 +12,8 @@ import './images/turing-logo.png'
 
 let recipeButtonList = document.querySelector('.recipe-list')
 let viewRecipe = document.querySelector('.display-recipe-object')
+let searchInput = document.querySelector('.search-input')
+var inputValue = document.querySelector('.search-input').value;
 
 console.log('Hello world');
 
@@ -57,21 +59,33 @@ const displayRecipe = (id) => {
   <p class="ingredients">${recipeInfo.getIngredient(ingredientList)}</p>
   <p class="cost">${recipeInfo.calculateCost(ingredientList)}</p>
   `
-  console.log(recipeInfo.recipe.instructions);
+  // console.log(recipeInfo.recipe.instructions);
 }
 // refactor to create get instructions function out of this function and call it here
+const searchByTagOrName = (input) => {
+  const searchTag = recipeList.filterTags(input);
+  const searchName = recipeList.filterName(input);
+  const searches = recipeList.recipe.reduce((acc, search) => {
+    if (searchTag) {
+      // acc.push(search)
+      console.log(search)
+    }
+  }, [])
+  // if (searchTag) {
+  //   console.log('rachel')
+  //   alertError();
+  // }
+}
 
-// should be able to view:
-// directions
-// ingredients needed
-// total cost
-
-// directions dot notation Recipe
-// ingredients -- Recipe(ingredientList)
-//
-// const show = () => {
-//   .classList.toggle('hidden')
+// const alertError = () => {
+//   window.alert("Search Again!");
 // }
+
+// error handling searches
+  // we want an error message to show up when no recipes match the search (or array is empty?)
+  /// function that checks to see if array is empty, then return window alert
+// filter recipe by tag
+// event listener for input within the search bar, whatever a user types is what we look up using the findTag method in RecipeRepository to then display the recipes it matches (list)
 
 // -------------- EVENT LISTENERS ----------------- //
 
@@ -81,3 +95,13 @@ recipeButtonList.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
   displayRecipe(targetId)
 })
+
+searchInput.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    let inputValue = e.target.value;
+    //console.log(inputValue)
+    searchByTagOrName(inputValue);
+  }
+})
+
+// if it includes tag or name, use OR (3 times for error?)
