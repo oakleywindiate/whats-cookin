@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import RecipeRepository from '../src/classes/RecipeRepository';
+import Recipe from '../src/classes/Recipe';
 
 describe('RecipeRepository', () => {
 
@@ -82,5 +83,12 @@ describe('RecipeRepository', () => {
 ]);
   });
 
+  it('should hold instances of a Recipe class', () => {
+    expect(recipeRepository.recipe[0]).to.be.an.instanceof(Recipe);
+  });
+
+  it('should be able to find a recipe by ID', () => {
+    expect(recipeRepository.findRecipeById("1")).to.deep.equal({ recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } });
+  });
 
 })
