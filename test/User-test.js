@@ -129,10 +129,16 @@ describe('User', () => {
     users.favoriteRecipe("1", recipeRepository)
     users.favoriteRecipe("2", recipeRepository)
     users.favoriteRecipe("4", recipeRepository)
-    
+
     expect(users.filterFavoriteNames('Pizza')).to.deep.equal([
     { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } },
     { recipe: { id: 4, tags: ['baz', 'tee', 'goop'], name: 'Pineapple Pizza' } }]);
   });
 
+  it('should be able to add recipes that a user wants to cook to a list', () => {
+    users.addRecipesToCook("1", recipeRepository)
+    expect(users.recipesToCook).to.deep.equal([
+    { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
+    )
+  });
 });
