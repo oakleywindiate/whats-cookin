@@ -74,6 +74,7 @@ describe('UserRepository', () => {
     expect(users.createUsers()).to.deep.equal([
   {
     favorites: [],
+    recipesToCook: [],
     userData: { name: "Saige O'Kon", id: 1, pantry: [
     {
       "ingredient": 11297,
@@ -86,6 +87,7 @@ describe('UserRepository', () => {
   ] } },
   {
     favorites: [],
+    recipesToCook: [],
     userData: { name: 'Ephraim Goyette', id: 2, pantry: [{
       "ingredient": 6150,
       "amount": 3
@@ -97,6 +99,7 @@ describe('UserRepository', () => {
   },
   {
     favorites: [],
+    recipesToCook: [],
     userData: { name: 'Nelda Bosco', id: 3, pantry: [          {
       "ingredient": 1009159,
       "amount": 3
