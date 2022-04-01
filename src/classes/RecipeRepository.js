@@ -29,6 +29,14 @@ class RecipeRepository {
     return mapRecipe
   };
 
+  findRecipeById(id) {
+    const filterRecipe = this.recipe.find(recipe => {
+      let stringifyId = recipe.recipe.id.toString()
+      return stringifyId === id
+    })
+    return filterRecipe
+  }
+
 };
 
 export default RecipeRepository;
