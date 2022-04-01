@@ -5,17 +5,13 @@ import RecipeRepository from '../src/classes/RecipeRepository';
 
 describe('User', () => {
 
-  let usersData;
-  let users;
-  // let pizzaRecipe;
-  // let recipe1;
+  let user;
+  let user1;
   let recipeData;
   let recipeRepository;
 
   beforeEach(() => {
-
-    usersData = [
-      {
+    user = {
         name: "Saige O'Kon",
         id: 1,
         pantry: [
@@ -28,36 +24,7 @@ describe('User', () => {
             "amount": 10
           }
         ]
-      },
-      {
-        name: "Ephraim Goyette",
-        id: 2,
-        pantry: [
-          {
-            "ingredient": 6150,
-            "amount": 3
-          },
-          {
-            "ingredient": 1032009,
-            "amount": 7
-          }
-        ]
-      },
-      {
-        name: "Nelda Bosco",
-        id: 3,
-        pantry: [
-          {
-            "ingredient": 1009159,
-            "amount": 3
-          },
-          {
-            "ingredient": 19335,
-            "amount": 10
-          },
-        ]
-      },
-    ];
+      };
 
     recipeData = [
       {
@@ -83,7 +50,7 @@ describe('User', () => {
     ]
 
     recipeRepository = new RecipeRepository(recipeData);
-    users = new User(usersData, recipeRepository);
+    user1 = new User(user);
 
   });
 
@@ -91,53 +58,54 @@ describe('User', () => {
     expect(User).to.be.a('function');
   });
 
-  it('should be an instance of a RecipeRepository', () => {
-    expect(users).to.be.an.instanceof(User);
+  it('should be an instance of a User', () => {
+    console.log(user)
+    expect(user1).to.be.an.instanceof(User);
   });
 
-  it('should be able to take in a recipe data set', () => {
-    expect(users.userData).to.equal(usersData);
+  it('should be able to take in a user data set', () => {
+    expect(user1.userData).to.equal(user);
   });
 
 
   it('should be able to favorite a recipe', () => {
-    users.favoriteRecipe("2", recipeRepository)
-    expect(users.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
+    user1.favoriteRecipe("2", recipeRepository)
+    expect(user1.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
   });
 
   it('should be able to unfavorite a recipe', () => {
-    users.favoriteRecipe("1", recipeRepository)
-    users.favoriteRecipe("2", recipeRepository)
+    user1.favoriteRecipe("1", recipeRepository)
+    user1.favoriteRecipe("2", recipeRepository)
 
-    users.unfavoriteRecipe(1)
+    user1.unfavoriteRecipe(1)
 
-    expect(users.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
+    expect(user1.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
   });
 
   it('should be able to filter a favorited recipe by tag', () => {
 
-    users.favoriteRecipe("1", recipeRepository)
-    users.favoriteRecipe("2", recipeRepository)
-    users.favoriteRecipe("3", recipeRepository)
+    user1.favoriteRecipe("1", recipeRepository)
+    user1.favoriteRecipe("2", recipeRepository)
+    user1.favoriteRecipe("3", recipeRepository)
 
-    expect(users.filterFavoriteTags('hoop')).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } },
+    expect(user1.filterFavoriteTags('hoop')).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } },
     { recipe: { id: 3, tags: ['hoop', 'baz', 'goop'], name: 'Salad' } }]);
   });
 
   it('should be able to filter a favorited recipe by tag', () => {
 
-    users.favoriteRecipe("1", recipeRepository)
-    users.favoriteRecipe("2", recipeRepository)
-    users.favoriteRecipe("4", recipeRepository)
+    user1.favoriteRecipe("1", recipeRepository)
+    user1.favoriteRecipe("2", recipeRepository)
+    user1.favoriteRecipe("4", recipeRepository)
 
-    expect(users.filterFavoriteNames('Pizza')).to.deep.equal([
+    expect(user1.filterFavoriteNames('Pizza')).to.deep.equal([
     { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } },
     { recipe: { id: 4, tags: ['baz', 'tee', 'goop'], name: 'Pineapple Pizza' } }]);
   });
 
   it('should be able to add recipes that a user wants to cook to a list', () => {
-    users.addRecipesToCook("1", recipeRepository)
-    expect(users.recipesToCook).to.deep.equal([
+    user1.addRecipesToCook("1", recipeRepository)
+    expect(user1.recipesToCook).to.deep.equal([
     { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
     )
   });
