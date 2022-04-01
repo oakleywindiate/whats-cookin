@@ -6,6 +6,8 @@ import apiCalls from './apiCalls';
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import Ingredient from './classes/Ingredient';
+import UserRepository from './classes/UserRepository';
+import User from './classes/User';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
@@ -15,14 +17,15 @@ let viewRecipe = document.querySelector('.display-recipe-object')
 let searchInput = document.querySelector('.search-input')
 let inputValue = document.querySelector('.search-input').value;
 let searchedRecipes = document.querySelector('.display-searched-recipes')
-
-console.log('Hello world');
+let modal = document.querySelector('.modal')
+let close = document.querySelector('.close')
+let heartButton = document.querySelector('.heart-button')
 
 let ingredientList = new Ingredient(ingredientsData);
 let recipeList = new RecipeRepository(recipeData);
-// let recipe1 = new Recipe(recipeList.recipeData[0])
+let userList = new UserRepository(usersData);
 
-console.log("recipeData", recipeList.recipeData)
+// let recipe1 = new Recipe(recipeList.recipeData[0])
 
 // console.log(recipeList.displayNames())
 // console.log(recipeList)
@@ -32,7 +35,17 @@ console.log("recipeData", recipeList.recipeData)
 // click on recipe for more information:
 // crate event listener that listens for click
 // function that uses logged id to do something
+const getRandomUser = (array) => {
+  const user = array[Math.floor(Math.random() * array.length)];
+  return user;
+}
+// console.log("randomizer: ", getRandomUser(recipeData));
 
+let user = getRandomUser(userList.userObjects);
+
+// function getRandomElement(array) {
+//   return array[Math.floor(Math.random() * array.length)];
+// };
 
 const createRecipeList = () => {
   recipeList.recipe.forEach(recipe => {
@@ -54,6 +67,7 @@ const displayRecipe = (id) => {
   const getInstructions = recipeInfo.recipe.instructions.map(instruction => {
     return instruction.instruction;
   })
+  viewRecipe.innerHTML = '';
   viewRecipe.innerHTML += `
   <h3 class="display-recipe-name">${recipeInfo.recipe.name}</h3>
   <p class="instructions">${getInstructions}</p>
@@ -73,10 +87,6 @@ const searchByTagOrName = (input) => {
   const getRecipeByName = searchName.map(namedRecipe => {
     searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${namedRecipe.id}">${namedRecipe.name}</button>`
   })
-
-  //if searchTag is truthy, then we inject HTML based on that array
-  //if searchName is truthy, inject HMTL based on that one
-  // console.log(searchName, searchTag)
 }
 
 // const alertError = () => {
@@ -89,6 +99,11 @@ const searchByTagOrName = (input) => {
 // filter recipe by tag
 // event listener for input within the search bar, whatever a user types is what we look up using the findTag method in RecipeRepository to then display the recipes it matches (list)
 
+// favoriting / unfavoriting recipes
+// when you click favorite button, the heart color should change to red (css styling) and push the recipe to the favorites array for that user (which we already have a method for: favoriteRecipe)
+// when a user clicks on the favorite recipe button, it should show the list of their favorite recipes
+
+
 // -------------- EVENT LISTENERS ----------------- //
 
 window.addEventListener('load', createRecipeList);
@@ -96,13 +111,22 @@ window.addEventListener('load', createRecipeList);
 recipeButtonList.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
   displayRecipe(targetId)
+  modal.style.display = "block";
+})
+
+close.addEventListener('click', (e) => {
+  modal.style.display = "none";
+})
+
+heartButton.addEventListener('click', (e) => {
+  heartButton.style.color = 'red';
+
 })
 
 searchedRecipes.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
   displayRecipe(targetId)
 })
-
 
 searchInput.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
