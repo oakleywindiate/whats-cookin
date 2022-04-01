@@ -77,7 +77,7 @@ input {
   cursor: pointer;
 }
 
-.heart-button {
+.heart-button-container {
   border: none;
   background-color: white;
   color: black;

@@ -19,7 +19,7 @@ let inputValue = document.querySelector('.search-input').value;
 let searchedRecipes = document.querySelector('.display-searched-recipes')
 let modal = document.querySelector('.modal')
 let close = document.querySelector('.close')
-let heartButton = document.querySelector('.heart-button')
+let heartButton = document.querySelector('.heart-button-container')
 
 let ingredientList = new Ingredient(ingredientsData);
 let recipeList = new RecipeRepository(recipeData);
@@ -74,6 +74,12 @@ const displayRecipe = (id) => {
   <p class="ingredients">${recipeInfo.getIngredient(ingredientList)}</p>
   <p class="cost">${recipeInfo.calculateCost(ingredientList)}</p>
   `
+  heartButton.innerHTML = '';
+  heartButton.innerHTML += `<button class="heart-button" id=${recipeInfo.recipe.id}>&hearts;</button>`
+  if (user.favorites.includes(recipeInfo.recipe.id)) {
+    heartButton.style.color = 'red';
+  }
+  // changeHeartColor(recipeInfo.recipe.id);
   // console.log(recipeInfo.recipe.instructions);
 }
 // refactor to create get instructions function out of this function and call it here
@@ -89,6 +95,19 @@ const searchByTagOrName = (input) => {
   })
 }
 
+// const changeHeartColor = (id) => {
+//   const favorites = user.favoriteRecipe(id, recipeList)
+//   console.log(user)
+//   // return favorites;
+//   //heartButton.style.color = 'red';
+//
+//   // push it to the array on click of the heart,
+//   // run an if statement, if that recipe is in the array, change the heart to red
+//
+//   // find the ID of that recipe object and push it in
+//   // if the ID that is passed in is equal to the
+//   // pushing to favorites / invoking that method here
+// }
 // const alertError = () => {
 //   window.alert("Search Again!");
 // }
@@ -101,6 +120,8 @@ const searchByTagOrName = (input) => {
 
 // favoriting / unfavoriting recipes
 // when you click favorite button, the heart color should change to red (css styling) and push the recipe to the favorites array for that user (which we already have a method for: favoriteRecipe)
+  // we want to only favorite the recipe that is clicked on
+  // if this recipe is in this array, show it as red
 // when a user clicks on the favorite recipe button, it should show the list of their favorite recipes
 
 
@@ -119,8 +140,10 @@ close.addEventListener('click', (e) => {
 })
 
 heartButton.addEventListener('click', (e) => {
+  let targetId = e.target.getAttribute('id')
+  user.favoriteRecipe(targetId, recipeList)
+  console.log(user.favorites);
   heartButton.style.color = 'red';
-
 })
 
 searchedRecipes.addEventListener('click', function(e) {
