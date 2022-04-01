@@ -97,21 +97,42 @@ describe('User', () => {
 
   it('should be able to take in a recipe data set', () => {
     expect(users.userData).to.equal(usersData);
-  })
+  });
 
 
   it('should be able to favorite a recipe', () => {
     users.favoriteRecipe("2", recipeRepository)
     expect(users.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
-  })
+  });
 
   it('should be able to unfavorite a recipe', () => {
     users.favoriteRecipe("1", recipeRepository)
     users.favoriteRecipe("2", recipeRepository)
-    console.log('2 favorited recipes', users.favorites)
-    users.unfavoriteRecipe(1)
-    console.log('deleted recipe 2',users.favorites)
-    expect(users.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
-  })
 
-})
+    users.unfavoriteRecipe(1)
+
+    expect(users.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
+  });
+
+  it('should be able to filter a favorited recipe by tag', () => {
+
+    users.favoriteRecipe("1", recipeRepository)
+    users.favoriteRecipe("2", recipeRepository)
+    users.favoriteRecipe("3", recipeRepository)
+
+    expect(users.filterFavoriteTags('hoop')).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } },
+    { recipe: { id: 3, tags: ['hoop', 'baz', 'goop'], name: 'Salad' } }]);
+  });
+
+  it('should be able to filter a favorited recipe by tag', () => {
+
+    users.favoriteRecipe("1", recipeRepository)
+    users.favoriteRecipe("2", recipeRepository)
+    users.favoriteRecipe("4", recipeRepository)
+    
+    expect(users.filterFavoriteNames('Pizza')).to.deep.equal([
+    { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } },
+    { recipe: { id: 4, tags: ['baz', 'tee', 'goop'], name: 'Pineapple Pizza' } }]);
+  });
+
+});
