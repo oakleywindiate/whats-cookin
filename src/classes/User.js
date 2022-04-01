@@ -4,6 +4,7 @@ class User {
   constructor(userData) {
     this.userData = userData;
     this.favorites = [];
+    this.recipesToCook = [];
   };
 
   favoriteRecipe(id, recipeRepository) {
@@ -28,6 +29,9 @@ class User {
     return filterFavoriteRecipesByName
   };
 
+  addRecipesToCook(id, recipeRepository) {
+    this.recipesToCook.push(recipeRepository.findRecipeById(id));
+  }
 };
 
 export default User;
