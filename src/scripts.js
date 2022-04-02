@@ -15,11 +15,21 @@ import './images/turing-logo.png'
 let recipeButtonList = document.querySelector('.recipe-list')
 let viewRecipe = document.querySelector('.display-recipe-object')
 let searchInput = document.querySelector('.search-input')
+let favoritesSearchInput = document.querySelector('.favorites-search-input')
 let inputValue = document.querySelector('.search-input').value;
 let searchedRecipes = document.querySelector('.display-searched-recipes')
 let modal = document.querySelector('.modal')
+let favoriteModal = document.querySelector('.favorite-modal')
 let close = document.querySelector('.close')
+let favoritesClose = document.querySelector('.favorites-close')
 let heartButton = document.querySelector('.heart-button-container')
+let favoritesButtonList = document.querySelector('.favorites-list')
+let favoritesButton = document.querySelector('.favorites-button')
+let mainPage = document.querySelector('.main-page-wrapper')
+let favoritesPage = document.querySelector('.favorites-page-wrapper')
+let viewFavorite = document.querySelector('.display-favorite-recipe-object')
+let searchedFavorites = document.querySelector('.favorites-display-searched-recipes')
+let searchFavoritesModal = document.querySelector('.display-search-favorite-recipe-object')
 
 let ingredientList = new Ingredient(ingredientsData);
 let recipeList = new RecipeRepository(recipeData);
@@ -62,13 +72,13 @@ const findRecipeId = (id) => {
   return filterRecipe
 }
 
-const displayRecipe = (id) => {
+const displayRecipe = (id, element) => {
   const recipeInfo = findRecipeId(id);
   const getInstructions = recipeInfo.recipe.instructions.map(instruction => {
     return instruction.instruction;
   })
-  viewRecipe.innerHTML = '';
-  viewRecipe.innerHTML += `
+  element.innerHTML = '';
+  element.innerHTML += `
   <h3 class="display-recipe-name">${recipeInfo.recipe.name}</h3>
   <p class="instructions">${getInstructions}</p>
   <p class="ingredients">${recipeInfo.getIngredient(ingredientList)}</p>
@@ -88,12 +98,53 @@ const searchByTagOrName = (input) => {
   const searchName = recipeList.filterName(input);
 
   const getRecipeByTag = searchTag.map(taggedRecipe => {
+    recipeButtonList.innerHTML = ''
     searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${taggedRecipe.id}">${taggedRecipe.name}</button>`
+    // displayRecipe(taggedRecipe.id)
   })
   const getRecipeByName = searchName.map(namedRecipe => {
+    recipeButtonList.innerHTML = ''
     searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${namedRecipe.id}">${namedRecipe.name}</button>`
+    // displayRecipe(namedRecipe.id)
   })
 }
+
+const showElement = (element) => {
+  element.classList.remove('hidden');
+};
+
+const hideElement = (element) => {
+  element.classList.add('hidden');
+};
+
+const createFavoritesList = () => {
+  user.favorites.forEach(favorite => {
+    favoritesButtonList.innerHTML += `<button class="favorites-list-button" id="${favorite.recipe.id}">${favorite.recipe.name}</button>`
+  })
+};
+
+const searchFavoritesByTagOrName = (input) => {
+  const searchTag = user.filterFavoriteTags(input);
+  const searchName = user.filterFavoriteNames(input);
+
+  const getRecipeByTag = searchTag.map(taggedRecipe => {
+    favoritesButtonList.innerHTML = ''
+    searchedFavorites.innerHTML += `<button class="recipe-list-button" id="${taggedRecipe.recipe.id}">${taggedRecipe.recipe.name}</button>`
+  })
+  const getRecipeByName = searchName.map(namedRecipe => {
+    favoritesButtonList.innerHTML = ''
+    searchedFavorites.innerHTML += `<button class="recipe-list-button" id="${namedRecipe.recipe.id}">${namedRecipe.recipe.name}</button>`
+  })
+}
+
+
+// show favorites
+// crate html hidden properties
+// create function to hide and unhide
+// when you click on favorite Recipies
+// hide everything
+// diplay section with search bar and favorites
+// add a button to go back to main page
 
 // const changeHeartColor = (id) => {
 //   const favorites = user.favoriteRecipe(id, recipeList)
@@ -131,9 +182,15 @@ window.addEventListener('load', createRecipeList);
 
 recipeButtonList.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
-  displayRecipe(targetId)
+  displayRecipe(targetId, viewRecipe)
   modal.style.display = "block";
 })
+
+// searchedRecipes.addEventListener('click', function(e) {
+//   let targetId = e.target.getAttribute('id')
+//   displayRecipe(targetId)
+//   modal.style.display = "block";
+// })
 
 close.addEventListener('click', (e) => {
   modal.style.display = "none";
@@ -143,12 +200,13 @@ heartButton.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id')
   user.favoriteRecipe(targetId, recipeList)
   console.log(user.favorites);
-  heartButton.style.color = 'red';
+  event.target.style.color = 'red';
 })
 
 searchedRecipes.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
-  displayRecipe(targetId)
+  displayRecipe(targetId, viewRecipe)
+  modal.style.display = "block";
 })
 
 searchInput.addEventListener('keyup', (e) => {
@@ -158,5 +216,37 @@ searchInput.addEventListener('keyup', (e) => {
     searchByTagOrName(inputValue);
   }
 })
+
+favoritesButton.addEventListener('click', (e) => {
+  hideElement(mainPage)
+  showElement(favoritesPage)
+  createFavoritesList()
+})
+
+favoritesButtonList.addEventListener('click', function(e) {
+  let targetId = e.target.getAttribute('id')
+  displayRecipe(targetId, searchedFavorites)
+  favoriteModal.style.display = "block";
+})
+
+favoritesClose.addEventListener('click', (e) => {
+  favoriteModal.style.display = "none";
+})
+
+favoritesSearchInput.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    let inputValue = e.target.value;
+    searchFavoritesByTagOrName(inputValue);
+  }
+})
+
+searchedFavorites.addEventListener('click', function(e) {
+  let targetId = e.target.getAttribute('id')
+  displayRecipe(targetId, searchFavoritesModal)
+  modal.style.display = "block";
+})
+
+
+
 
 // if it includes tag or name, use OR (3 times for error?)
