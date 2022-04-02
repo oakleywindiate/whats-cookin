@@ -5,45 +5,94 @@
     <title>Whats Cookin</title>
   </head>
   <body>
-    <nav>
-    <h1>Whats Cookin</h1>
-    <section class="search-bar-container" id="searchBarContainer">
-      <div class="search-bar">
-        <input type="text" class="search-input" placeholder="What do you want to cook? Type a name of a recipe and press enter">
-      </div>
-    </section>
-    <section class="favorite-recipes" id="favoriteRecipes">
-      <button class="favorites-button" id="favoritesButton">Favorite Recipies</button>
-    </section>
-    </nav>
-    <main>
-      <section class="featured-recipe-container" id="featuredRecipeContainer">
-        <img>
-        <section class="featured-recipe" id="featuredRecipe">
-          <h2 class="featured-recipe-text" id="featuredRecipeText">Featured Recipe</h2>
-        </section>
+    <section class="main-page-wrapper">
+      <nav>
+      <h1>Whats Cookin</h1>
+      <section class="search-bar-container" id="searchBarContainer">
+        <div class="search-bar">
+          <input type="text" class="search-input" placeholder="What do you want to cook? Type a name of a recipe and press enter">
+        </div>
       </section>
-      <section class="recipe-list-container" id="recipeListContainer">
-        <section class="recipe-list" id="recipeList">
-          <!-- recipe list injects here -->
-        </section>
+      <section class="favorite-recipes" id="favoriteRecipes">
+        <button class="favorites-button" id="favoritesButton">Favorite Recipies</button>
       </section>
-      <!-- Modal content -->
-      <section id="modal" class="modal">
-        <section class="modal-content">
-          <span class="close">&times;</span>
-          <section class="display-recipe-object">
-            <!-- recipe details inject here -->
+      </nav>
+      <main>
+        <section class="featured-recipe-container" id="featuredRecipeContainer">
+          <img>
+          <section class="featured-recipe" id="featuredRecipe">
+            <h2 class="featured-recipe-text" id="featuredRecipeText">Featured Recipe</h2>
           </section>
-          <div class="heart-button-container">
-            <button class="heart-button">&hearts;</button>
-          </div>
         </section>
+        <section class="recipe-list-container" id="recipeListContainer">
+          <section class="recipe-list" id="recipeList">
+            <!-- recipe list injects here -->
+          </section>
+        </section>
+        <!-- Modal content -->
+        <section id="modal" class="modal">
+          <section class="modal-content">
+            <span class="close">&times;</span>
+            <section class="display-recipe-object">
+              <!-- recipe details inject here -->
+            </section>
+            <div class="heart-button-container">
+              <!-- <button class="heart-button">&hearts;</button> -->
+            </div>
+          </section>
+        </section>
+        <section class="display-searched-recipes">
+          <!-- search results inject here -->
+        </section>
+      </main>
+    </section>
+    <!-- favorites section -->
+    <section class="favorites-page-wrapper hidden">
+      <nav>
+      <h1>Whats Cookin</h1>
+      <section class="favorites-search-bar-container" id="favoritesSearchBarContainer">
+        <div class="favorites-search-bar">
+          <input type="text" class="favorites-search-input" placeholder="Search your favorite recipes...">
+        </div>
       </section>
-      <section class="display-searched-recipes">
-        <!-- search results inject here -->
+      <section class="favorites-home-button" id="favoritesHomeButton">
+        <button class="home-button" id="homeButton">Home Button</button>
       </section>
-    </main>
+      </nav>
+      <main>
+        <section class="favorites-list-container" id="favoritesListContainer">
+          <section class="favorites-list" id="favoritesList">
+            <!-- favorites list injects here -->
+          </section>
+        </section>
+        <!-- Modal content -->
+        <section id="modal" class="favorite-modal">
+          <section class="modal-content">
+            <span class="favorites-close">&times;</span>
+            <section class="display-favorite-recipe-object">
+              <!-- recipe details inject here -->
+            </section>
+            <div class="heart-button-container">
+              <!-- <button class="heart-button">&hearts;</button> -->
+            </div>
+          </section>
+        </section>
+        <section class="favorites-display-searched-recipes">
+          <!-- search results inject here -->
+          <section id="modal" class="favorite-modal">
+            <section class="modal-content">
+              <span class="search-favorites-close">&times;</span>
+              <section class="display-search-favorite-recipe-object">
+                <!-- recipe details inject here -->
+              </section>
+              <div class="heart-button-container">
+                <!-- <button class="heart-button">&hearts;</button> -->
+              </div>
+            </section>
+          </section>
+        </section>
+      </main>
+    </section>
   </body>
   <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>

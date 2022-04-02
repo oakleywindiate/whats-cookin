@@ -36,12 +36,14 @@ input {
   flex-wrap: wrap;
 }
 
-.recipe-list-button {
+.recipe-list-button,
+.favorites-list-button {
   width: 30vw;
   height: 30vh;
 }
 
-.modal {
+.modal,
+.favorite-modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -63,7 +65,8 @@ input {
   width: 80%;
 }
 
-.close {
+.close,
+.favorites-close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
@@ -71,13 +74,15 @@ input {
 }
 
 .close:hover,
-.close:focus {
+.close:focus,
+.favorites-close:hover,
+.favorites-close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
-.heart-button {
+.heart-button-container {
   border: none;
   background-color: white;
   color: black;
