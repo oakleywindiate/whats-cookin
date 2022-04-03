@@ -1,3 +1,5 @@
+// ----------------- IMPORTS ----------------- //
+
 import './styles.css';
 import ingredientsData from './data/ingredients';
 import recipeData from './data/recipes';
@@ -9,8 +11,9 @@ import Ingredient from './classes/Ingredient';
 import UserRepository from './classes/UserRepository';
 import User from './classes/User';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+// import './images/turing-logo.png'
+
+// ----------------- QUERY SELECTORS ----------------- //
 
 let recipeButtonList = document.querySelector('.recipe-list')
 let viewRecipe = document.querySelector('.display-recipe-object')
@@ -22,7 +25,10 @@ let modal = document.querySelector('.modal')
 let favoriteModal = document.querySelector('.favorite-modal')
 let close = document.querySelector('.close')
 let favoritesClose = document.querySelector('.favorites-close')
+let rtcClose = document.querySelector('.rtc-close')
 let heartButton = document.querySelector('.heart-button-container')
+let favoritesHeartButton = document.querySelector('.favorites-heart-button-container')
+let rtcHeartButton = document.querySelector('.rtc-heart-button-container')
 let favoritesButtonList = document.querySelector('.favorites-list')
 let favoritesButton = document.querySelector('.favorites-button')
 let mainPage = document.querySelector('.main-page-wrapper')
@@ -30,10 +36,24 @@ let favoritesPage = document.querySelector('.favorites-page-wrapper')
 let viewFavorite = document.querySelector('.display-favorite-recipe-object')
 let searchedFavorites = document.querySelector('.favorites-display-searched-recipes')
 let searchFavoritesModal = document.querySelector('.display-search-favorite-recipe-object')
+let homeButton = document.querySelector('.home-button')
+let viewPantry = document.querySelector('.pantry-button')
+let pantryPage = document.querySelector('.pantry-page-wrapper')
+let pantryHomeButton = document.querySelector('.pantry-home-button')
+let rtcHomeButton = document.querySelector('.rtc-home-button')
+let viewRtc = document.querySelector('.recipes-to-cook-button')
+let rtcPage = document.querySelector('.rtc-page-wrapper')
+let favoritesRtcButton = document.querySelector('.favorites-rtc-button-container')
+let addRecipesToCookButton = document.querySelector('.addRecipeToCook-button-container')
+let rtcButtonList = document.querySelector('.rtc-list')
+let rtcModal = document.querySelector('.rtc-modal')
+let viewRecipesToCook = document.querySelector('.display-rtc-recipe-object')
+let rtcRtcButton = document.querySelector('.rtc-rtc-button-container')
 
 let ingredientList = new Ingredient(ingredientsData);
 let recipeList = new RecipeRepository(recipeData);
 let userList = new UserRepository(usersData);
+
 
 // let recipe1 = new Recipe(recipeList.recipeData[0])
 
@@ -53,13 +73,11 @@ const getRandomUser = (array) => {
 
 let user = getRandomUser(userList.userObjects);
 
-// function getRandomElement(array) {
-//   return array[Math.floor(Math.random() * array.length)];
-// };
+// ----------------- FUNCTIONS ----------------- //
 
 const createRecipeList = () => {
   recipeList.recipe.forEach(recipe => {
-    recipeButtonList.innerHTML += `<button class="recipe-list-button" id="${recipe.recipe.id}">${recipe.recipe.name}</button>`
+    recipeButtonList.innerHTML += `<button class="recipe-list-button" id="${recipe.recipe.id}">${recipe.recipe.name}<img class="display-picture" src="${recipe.recipe.image}"></button>`
   })
 };
 
@@ -72,23 +90,27 @@ const findRecipeId = (id) => {
   return filterRecipe
 }
 
-const displayRecipe = (id, element) => {
+const displayRecipe = (id, recipeElement, heartElement, rtcElement) => {
   const recipeInfo = findRecipeId(id);
   const getInstructions = recipeInfo.recipe.instructions.map(instruction => {
     return instruction.instruction;
   })
-  element.innerHTML = '';
-  element.innerHTML += `
+  recipeElement.innerHTML = '';
+  recipeElement.innerHTML += `
   <h3 class="display-recipe-name">${recipeInfo.recipe.name}</h3>
   <p class="instructions">${getInstructions}</p>
   <p class="ingredients">${recipeInfo.getIngredient(ingredientList)}</p>
   <p class="cost">${recipeInfo.calculateCost(ingredientList)}</p>
   `
-  heartButton.innerHTML = '';
-  heartButton.innerHTML += `<button class="heart-button" id=${recipeInfo.recipe.id}>&hearts;</button>`
-  if (user.favorites.includes(recipeInfo.recipe.id)) {
-    heartButton.style.color = 'red';
-  }
+  heartElement.innerHTML = '';
+  heartElement.innerHTML += `<button class="heart-button" id=${recipeInfo.recipe.id}>&hearts;</button>`
+  // if (user.favorites.includes(recipeInfo.recipe.id)) {
+  //   heartButton.style.color = 'red';
+  // }
+
+  rtcElement.innerHTML = '';
+  rtcElement.innerHTML += `<button class="addRecipeToCook-button" id=${recipeInfo.recipe.id}>+</button>`
+
   // changeHeartColor(recipeInfo.recipe.id);
   // console.log(recipeInfo.recipe.instructions);
 }
@@ -137,14 +159,11 @@ const searchFavoritesByTagOrName = (input) => {
   })
 }
 
-
-// show favorites
-// crate html hidden properties
-// create function to hide and unhide
-// when you click on favorite Recipies
-// hide everything
-// diplay section with search bar and favorites
-// add a button to go back to main page
+const createRecipesToCookList = () => {
+  user.recipesToCook.forEach(recipe => {
+    rtcButtonList.innerHTML += `<button class="rtc-list-button" id="${recipe.recipe.id}">${recipe.recipe.name}</button>`
+  })
+};
 
 // const changeHeartColor = (id) => {
 //   const favorites = user.favoriteRecipe(id, recipeList)
@@ -176,21 +195,15 @@ const searchFavoritesByTagOrName = (input) => {
 // when a user clicks on the favorite recipe button, it should show the list of their favorite recipes
 
 
-// -------------- EVENT LISTENERS ----------------- //
+// ----------------- EVENT LISTENERS ----------------- //
 
 window.addEventListener('load', createRecipeList);
 
 recipeButtonList.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
-  displayRecipe(targetId, viewRecipe)
+  displayRecipe(targetId, viewRecipe, heartButton, addRecipesToCookButton)
   modal.style.display = "block";
 })
-
-// searchedRecipes.addEventListener('click', function(e) {
-//   let targetId = e.target.getAttribute('id')
-//   displayRecipe(targetId)
-//   modal.style.display = "block";
-// })
 
 close.addEventListener('click', (e) => {
   modal.style.display = "none";
@@ -199,7 +212,6 @@ close.addEventListener('click', (e) => {
 heartButton.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id')
   user.favoriteRecipe(targetId, recipeList)
-  console.log(user.favorites);
   event.target.style.color = 'red';
 })
 
@@ -212,7 +224,6 @@ searchedRecipes.addEventListener('click', function(e) {
 searchInput.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
     let inputValue = e.target.value;
-    //console.log(inputValue)
     searchByTagOrName(inputValue);
   }
 })
@@ -220,17 +231,20 @@ searchInput.addEventListener('keyup', (e) => {
 favoritesButton.addEventListener('click', (e) => {
   hideElement(mainPage)
   showElement(favoritesPage)
+  favoritesButtonList.innerHTML = '';
   createFavoritesList()
 })
 
-favoritesButtonList.addEventListener('click', function(e) {
+favoritesButtonList.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id')
-  displayRecipe(targetId, searchedFavorites)
+  displayRecipe(targetId, viewFavorite, favoritesHeartButton, favoritesRtcButton)
   favoriteModal.style.display = "block";
 })
 
 favoritesClose.addEventListener('click', (e) => {
   favoriteModal.style.display = "none";
+  favoritesButtonList.innerHTML = '';
+  createFavoritesList()
 })
 
 favoritesSearchInput.addEventListener('keyup', (e) => {
@@ -240,13 +254,58 @@ favoritesSearchInput.addEventListener('keyup', (e) => {
   }
 })
 
-searchedFavorites.addEventListener('click', function(e) {
+searchedFavorites.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id')
-  displayRecipe(targetId, searchFavoritesModal)
-  modal.style.display = "block";
+  displayRecipe(targetId, viewFavorite, favoritesHeartButton, favoritesRtcButton)
+  favoriteModal.style.display = "block";
 })
 
+homeButton.addEventListener('click', (e) => {
+  hideElement(favoritesPage)
+  showElement(mainPage)
+})
 
+viewPantry.addEventListener('click', (e) => {
+  hideElement(mainPage)
+  showElement(pantryPage)
+})
 
+pantryHomeButton.addEventListener('click', (e) => {
+  hideElement(pantryPage)
+  showElement(mainPage)
+})
 
-// if it includes tag or name, use OR (3 times for error?)
+viewRtc.addEventListener('click', (e) => {
+  hideElement(mainPage)
+  showElement(rtcPage)
+  rtcButtonList.innerHTML = '';
+  createRecipesToCookList()
+})
+
+rtcHomeButton.addEventListener('click', (e) => {
+  hideElement(rtcPage)
+  showElement(mainPage)
+})
+
+addRecipesToCookButton.addEventListener('click', (e) => {
+  let targetId = e.target.getAttribute('id')
+  user.addRecipesToCook(targetId, recipeList)
+  // console.log(user.recipesToCook);
+  event.target.style.color = 'red';
+})
+
+rtcButtonList.addEventListener('click', (e) => {
+  let targetId = e.target.getAttribute('id')
+  displayRecipe(targetId, viewRecipesToCook, rtcHeartButton, rtcRtcButton)
+  rtcModal.style.display = "block";
+})
+
+rtcClose.addEventListener('click', (e) => {
+  rtcModal.style.display = "none";
+})
+
+favoritesHeartButton.addEventListener('click', (e) => {
+  let targetId = e.target.getAttribute('id')
+  user.unfavoriteRecipe(targetId)
+  event.target.style.color = 'black';
+})
