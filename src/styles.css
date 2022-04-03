@@ -26,8 +26,19 @@ input {
     cursor: pointer;
 }
 
+.menu-section {
+  display: flex;
+  flex-direction: column;
+}
+
 .featured-recipe-container {
   padding: 10%;
+}
+
+.display-picture {
+  display: block;
+  height: 30vh;
+  pointer-events: none;
 }
 
 .recipe-list-container {
@@ -37,13 +48,17 @@ input {
 }
 
 .recipe-list-button,
-.favorites-list-button {
+.favorites-list-button,
+.rtc-list-button {
   width: 30vw;
   height: 30vh;
+
 }
 
 .modal,
-.favorite-modal {
+.favorite-modal,
+.rtc-modal,
+.rtc-search-modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -66,7 +81,8 @@ input {
 }
 
 .close,
-.favorites-close {
+.favorites-close,
+.rtc-close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
@@ -76,16 +92,24 @@ input {
 .close:hover,
 .close:focus,
 .favorites-close:hover,
-.favorites-close:focus {
+.favorites-close:focus,
+.rtc-close:hover,
+.rtc-close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
 
-.heart-button-container {
+.favorites-heart-button-container > .heart-button {
+  color: red;
+}
+
+.heart-button-container,
+.addRecipeToCook-button-container,
+.favorites-heart-button-container,
+.rtc-heart-button-container {
   border: none;
   background-color: white;
-  color: black;
   font-size: 40px;
 }
 
