@@ -110,7 +110,7 @@ const createDataInstances = (data) => {
 
 const createRecipeList = () => {
   recipeList.recipe.forEach(recipe => {
-    recipeButtonList.innerHTML += `<button class="recipe-list-button" id="${recipe.recipe.id}">${recipe.recipe.name}<img class="display-picture" src="${recipe.recipe.image}"></button>`
+    recipeButtonList.innerHTML += `<button class="recipe-list-button" id="${recipe.recipe.id}"><h3 class="recipe-titles">${recipe.recipe.name}</h3><img class="display-picture" src="${recipe.recipe.image}"></button>`
   })
 };
 
