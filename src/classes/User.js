@@ -33,7 +33,10 @@ class User {
   }
 
   addRecipesToCook(id, recipeRepository) {
-    this.recipesToCook.push(recipeRepository.findRecipeById(id));
+    const recipeObject = recipeRepository.findRecipeById(id);
+    if (!this.recipesToCook.includes(recipeObject)) {
+      this.recipesToCook.push(recipeRepository.findRecipeById(id));
+    };
   }
 };
 
