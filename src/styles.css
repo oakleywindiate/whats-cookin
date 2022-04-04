@@ -1,10 +1,13 @@
 body {
-  background-color: blueviolet;
+  background-color: #B9E4C9;
 }
 
 nav {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
 }
 
 main {
@@ -15,11 +18,32 @@ main {
 input {
  width: 50vw;
  height: 5vh;
+}
 
+h1 {
+  margin: 30px;
+  color: #356859;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 70px;
+}
+
+h3 {
+  font-family: 'Lekton', sans-serif;
+  color: #F95624;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+.favorites-button, .pantry-button, .recipes-to-cook-button {
+  padding: 10px;
+  margin: 6px;
 }
 
 .search-bar {
-    margin-top: 8px;
+    margin: 20px;
     background: #ddd;
     font-size: 17px;
     border: none;
@@ -28,7 +52,8 @@ input {
 
 .menu-section {
   display: flex;
-  flex-direction: column;
+  padding: 20px;
+  flex-direction: row;
 }
 
 .featured-recipe-container {
@@ -37,7 +62,7 @@ input {
 
 .display-picture {
   display: block;
-  height: 30vh;
+  height: 20vh;
   pointer-events: none;
 }
 
@@ -47,12 +72,28 @@ input {
   flex-wrap: wrap;
 }
 
+.recipe-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-top: 10px;
+}
+
+.recipe-list-button {
+  margin: 10px;
+  background-color: #FFFBE6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .recipe-list-button,
 .favorites-list-button,
 .rtc-list-button {
   width: 30vw;
   height: 30vh;
-
 }
 
 .modal,
