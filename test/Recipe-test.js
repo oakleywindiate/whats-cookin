@@ -117,8 +117,8 @@ describe('Recipe', () => {
           }
       ];
       ingredient1 = new Ingredient(ingredientsData)
-  })
-
+  });
+  
   it('Should be a function', () => {
     expect(Recipe).to.be.a('function');
   });
@@ -158,5 +158,5 @@ describe('Recipe', () => {
         number: 1
       }
     ]);
-  })
+  });
 });
