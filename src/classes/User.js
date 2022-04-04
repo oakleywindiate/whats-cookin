@@ -8,7 +8,10 @@ class User {
   };
 
   favoriteRecipe(id, recipeRepository) {
-    this.favorites.push(recipeRepository.findRecipeById(id));
+    const recipeObject = recipeRepository.findRecipeById(id)
+    if (!this.favorites.includes(recipeObject)) {
+      this.favorites.push(recipeRepository.findRecipeById(id));
+    }
   }
 
   unfavoriteRecipe(id) {
