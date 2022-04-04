@@ -131,9 +131,9 @@ const displayRecipe = (id, recipeElement, heartElement, rtcElement) => {
   recipeElement.innerHTML = '';
   recipeElement.innerHTML += `
   <h3 class="display-recipe-name">${recipeInfo.recipe.name}</h3>
-  <p class="instructions">${getInstructions}</p>
-  <p class="ingredients">${recipeInfo.getIngredient(ingredientList)}</p>
-  <p class="cost">${recipeInfo.calculateCost(ingredientList)}</p>
+  <p class="instructions">Cooking Directions: ${getInstructions}</p>
+  <p class="ingredients">Ingredients: ${recipeInfo.getIngredient(ingredientList)}</p>
+  <p class="cost">Cost: ${recipeInfo.calculateCost(ingredientList)}</p>
   `
   heartElement.innerHTML = '';
   heartElement.innerHTML += `<button class="heart-button" id=${recipeInfo.recipe.id}>&hearts;</button>`
@@ -154,12 +154,12 @@ const searchByTagOrName = (input) => {
 
   const getRecipeByTag = searchTag.map(taggedRecipe => {
     recipeButtonList.innerHTML = ''
-    searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${taggedRecipe.id}">${taggedRecipe.name}</button>`
+    searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${taggedRecipe.id}"><h3 class="recipe-titles">${taggedRecipe.name}</h3><img class="display-picture" src="${taggedRecipe.image}"></button>`
     // displayRecipe(taggedRecipe.id)
   })
   const getRecipeByName = searchName.map(namedRecipe => {
     recipeButtonList.innerHTML = ''
-    searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${namedRecipe.id}">${namedRecipe.name}</button>`
+    searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${namedRecipe.id}"><h3 class="recipe-titles">${namedRecipe.name}</h3><img class="display-picture" src="${namedRecipe.image}"></button>`
     // displayRecipe(namedRecipe.id)
   })
 }
