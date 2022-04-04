@@ -84,13 +84,15 @@ button {
   flex-wrap: wrap;
 }
 
-.recipe-list, .favorites-list, .rtc-list {
+.recipe-list, .favorites-list, .rtc-list, .display-searched-recipes {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding-top: 10px;
 }
+
+
 
 .recipe-list-button, .favorites-list-button, .rtc-list-button {
   margin: 10px;
