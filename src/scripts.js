@@ -5,6 +5,7 @@ import ingredientsData from './data/ingredients';
 import recipeData from './data/recipes';
 import usersData from './data/users';
 import apiCalls from './apiCalls';
+import {usersDataAPI, ingredientsDataAPI, recipesDataAPI, getFetchAll, displayError} from './apiCalls.js'
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import Ingredient from './classes/Ingredient';
@@ -50,6 +51,10 @@ let rtcModal = document.querySelector('.rtc-modal')
 let viewRecipesToCook = document.querySelector('.display-rtc-recipe-object')
 let rtcRtcButton = document.querySelector('.rtc-rtc-button-container')
 
+let ingredientsDataFromApi
+let usersDataFromApi
+let recipeDataFromApi
+
 let ingredientList = new Ingredient(ingredientsData);
 let recipeList = new RecipeRepository(recipeData);
 let userList = new UserRepository(usersData);
@@ -73,7 +78,26 @@ const getRandomUser = (array) => {
 
 let user = getRandomUser(userList.userObjects);
 
+
+
+
 // ----------------- FUNCTIONS ----------------- //
+
+const getApiData = () => {
+  getFetchAll()
+  Promise.all([usersDataAPI, ingredientsDataAPI, recipesDataAPI])
+  .then(data => createDataInstances(data))
+  // console.log(data)
+}
+
+const createDataInstances = (data) => {
+  usersDataFromApi = data[0].usersData
+  ingredientsDataFromApi = data[1].ingredientsData
+  recipeDataFromApi = data[2].recipeData
+  console.log('API', recipeDataFromApi)
+  console.log('original', recipeData)
+}
+
 
 const createRecipeList = () => {
   recipeList.recipe.forEach(recipe => {
@@ -198,6 +222,7 @@ const createRecipesToCookList = () => {
 // ----------------- EVENT LISTENERS ----------------- //
 
 window.addEventListener('load', createRecipeList);
+window.addEventListener('load', getApiData)
 
 recipeButtonList.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
