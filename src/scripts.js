@@ -1,9 +1,9 @@
 // ----------------- IMPORTS ----------------- //
 
 import './styles.css';
-import ingredientsData from './data/ingredients';
-import recipeData from './data/recipes';
-import usersData from './data/users';
+// import ingredientsData from './data/ingredients';
+// import recipeData from './data/recipes';
+// import usersData from './data/users';
 import apiCalls from './apiCalls';
 import {usersDataAPI, ingredientsDataAPI, recipesDataAPI, getFetchAll, displayError} from './apiCalls.js'
 import RecipeRepository from './classes/RecipeRepository';
@@ -51,14 +51,19 @@ let rtcModal = document.querySelector('.rtc-modal')
 let viewRecipesToCook = document.querySelector('.display-rtc-recipe-object')
 let rtcRtcButton = document.querySelector('.rtc-rtc-button-container')
 
-let ingredientsDataFromApi
-let usersDataFromApi
-let recipeDataFromApi
+//
+// let ingredientsDataFromApi
+// let usersDataFromApi
+// let recipeDataFromApi
 
-let ingredientList = new Ingredient(ingredientsData);
-let recipeList = new RecipeRepository(recipeData);
-let userList = new UserRepository(usersData);
+let ingredientList;
+let recipeList;
+let userList;
+let user;
 
+// let ingredientList = new Ingredient(ingredientsData);
+// let recipeList = new RecipeRepository(recipeData);
+// let userList = new UserRepository(usersData);
 
 // let recipe1 = new Recipe(recipeList.recipeData[0])
 
@@ -76,7 +81,7 @@ const getRandomUser = (array) => {
 }
 // console.log("randomizer: ", getRandomUser(recipeData));
 
-let user = getRandomUser(userList.userObjects);
+// let user = getRandomUser(userList.userObjects);
 
 
 
@@ -87,15 +92,19 @@ const getApiData = () => {
   getFetchAll()
   Promise.all([usersDataAPI, ingredientsDataAPI, recipesDataAPI])
   .then(data => createDataInstances(data))
-  // console.log(data)
+  // console.log("data", data)
 }
 
 const createDataInstances = (data) => {
-  usersDataFromApi = data[0].usersData
-  ingredientsDataFromApi = data[1].ingredientsData
-  recipeDataFromApi = data[2].recipeData
-  console.log('API', recipeDataFromApi)
-  console.log('original', recipeData)
+  ingredientList = new Ingredient(data[1].ingredientsData);
+  recipeList = new RecipeRepository(data[2].recipeData);
+  userList = new UserRepository(data[0].usersData);
+  user = getRandomUser(userList.userObjects);
+  createRecipeList()
+  // ingredientsDataFromApi = data[1].ingredientsData
+  // recipeDataFromApi = data[2].recipeData
+  // console.log('API', recipeDataFromApi)
+  // console.log('original', recipeData)
 }
 
 
@@ -221,7 +230,7 @@ const createRecipesToCookList = () => {
 
 // ----------------- EVENT LISTENERS ----------------- //
 
-window.addEventListener('load', createRecipeList);
+// window.addEventListener('load', createRecipeList);
 window.addEventListener('load', getApiData)
 
 recipeButtonList.addEventListener('click', function(e) {
@@ -242,7 +251,7 @@ heartButton.addEventListener('click', (e) => {
 
 searchedRecipes.addEventListener('click', function(e) {
   let targetId = e.target.getAttribute('id')
-  displayRecipe(targetId, viewRecipe)
+  displayRecipe(targetId, viewRecipe, heartButton, addRecipesToCookButton)
   modal.style.display = "block";
 })
 
