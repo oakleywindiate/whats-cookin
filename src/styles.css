@@ -1,10 +1,13 @@
 body {
-  background-color: blueviolet;
+  background-color: #B9E4C9;
 }
 
 nav {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
 }
 
 main {
@@ -13,22 +16,56 @@ main {
 }
 
 input {
- width: 50vw;
+ width: 72vw;
  height: 5vh;
-
+ font-family: 'Lekton', sans-serif;
+ background-color: #FFFBE6;
+ font-size: 19px;
 }
 
+h1 {
+  margin: 30px;
+  color: #356859;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 70px;
+}
+
+h3 {
+  font-family: 'Lekton', sans-serif;
+  color: #F95624;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+.favorites-button, .recipes-to-cook-button, .rtc-home-button, .home-button {
+  padding: 15px;
+  margin: 25px;
+  color: #FFFBE6;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  background-color: #356859;
+}
+
+/* .rtc-home-button {
+  margin: 5px;
+  padding: 5px;
+} */
+
 .search-bar {
-    margin-top: 8px;
-    background: #ddd;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
+  margin: 20px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
 }
 
 .menu-section {
   display: flex;
-  flex-direction: column;
+  padding: 20px;
+  flex-direction: row;
 }
 
 .featured-recipe-container {
@@ -37,7 +74,7 @@ input {
 
 .display-picture {
   display: block;
-  height: 30vh;
+  height: 20vh;
   pointer-events: none;
 }
 
@@ -47,12 +84,37 @@ input {
   flex-wrap: wrap;
 }
 
+.recipe-list, .favorites-list, .rtc-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-top: 10px;
+}
+
+.recipe-list-button, .favorites-list-button, .rtc-list-button {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #FFFBE6;
+}
+
 .recipe-list-button,
 .favorites-list-button,
 .rtc-list-button {
   width: 30vw;
   height: 30vh;
+}
 
+/* .display-recipe-object {
+
+} */
+
+.display-recipe-name {
+  text-align: center;
+  font-size: 30px;
 }
 
 .modal,
@@ -73,11 +135,13 @@ input {
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: #FFFBE6;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  font-family: 'Montserrat', sans-serif;
+  color: #356859;
 }
 
 .close,
@@ -85,8 +149,9 @@ input {
 .rtc-close {
   color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  font-size: 50px;
   font-weight: bold;
+  padding: 10px;
 }
 
 .close:hover,
@@ -109,8 +174,9 @@ input {
 .favorites-heart-button-container,
 .rtc-heart-button-container {
   border: none;
-  background-color: white;
+  background-color: #FFFBE6;
   font-size: 40px;
+  display: flex;
 }
 
 .hidden {

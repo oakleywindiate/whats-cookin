@@ -3,30 +3,34 @@
   <head>
     <meta charset="UTF-8">
     <title>Whats Cookin</title>
+    <!-- <link href="styles.css" rel="stylesheet" type="text/css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lekton:wght@700&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
   </head>
   <body>
 <!-- MAIN PAGE -->
     <section class="main-page-wrapper">
       <nav>
-      <h1>Whats Cookin</h1>
+      <h1>Whats Cookin?</h1>
       <section class="search-bar-container" id="searchBarContainer">
         <div class="search-bar">
           <input type="text" class="search-input" placeholder="What do you want to cook? Type a name of a recipe and press enter">
         </div>
       </section>
       <section class="menu-section" id="menuSection">
-        <button class="favorites-button" id="favoritesButton">Favorite Recipies</button>
-        <button class="pantry-button" id="pantryButton">My Pantry</button>
-        <button class="recipes-to-cook-button" id="recipesToCookButton">Recipes To Cook</button>
+        <button class="favorites-button" id="favoritesButton">FAVORITE RECIPES</button>
+        <!-- <button class="pantry-button" id="pantryButton">MY PANTRY</button> -->
+        <button class="recipes-to-cook-button" id="recipesToCookButton">RECIPES TO COOK</button>
       </section>
       </nav>
       <main>
-        <section class="featured-recipe-container" id="featuredRecipeContainer">
+        <!-- <section class="featured-recipe-container" id="featuredRecipeContainer">
           <img>
           <section class="featured-recipe" id="featuredRecipe">
             <h2 class="featured-recipe-text" id="featuredRecipeText">Featured Recipe</h2>
           </section>
-        </section>
+        </section> -->
         <section class="recipe-list-container" id="recipeListContainer">
           <section class="recipe-list" id="recipeListId">
             <!-- recipe list injects here -->
@@ -111,7 +115,7 @@
           <input type="text" class="rtc-search-input" placeholder="Search your recipes to cook...">
         </div>
       </section>
-      <section class="rtc-home-button" id="rtcHomeButton">
+      <section class="rtc-home-button-container" id="rtcHomeButton-container">
         <button class="rtc-home-button" id="rtchomeButton">Home Button</button>
       </section>
       </nav>
