@@ -174,7 +174,7 @@ const hideElement = (element) => {
 
 const createFavoritesList = () => {
   user.favorites.forEach(favorite => {
-    favoritesButtonList.innerHTML += `<button class="favorites-list-button" id="${favorite.recipe.id}">${favorite.recipe.name}</button>`
+    favoritesButtonList.innerHTML += `<button class="favorites-list-button" id="${favorite.recipe.id}"><h3 class="favorite-recipe-titles">${favorite.recipe.name}</h3><img class="display-picture" src="${favorite.recipe.image}"></button>`
   })
 };
 
@@ -194,7 +194,7 @@ const searchFavoritesByTagOrName = (input) => {
 
 const createRecipesToCookList = () => {
   user.recipesToCook.forEach(recipe => {
-    rtcButtonList.innerHTML += `<button class="rtc-list-button" id="${recipe.recipe.id}">${recipe.recipe.name}</button>`
+    rtcButtonList.innerHTML += `<button class="rtc-list-button" id="${recipe.recipe.id}"><h3 class="rtc-titles">${recipe.recipe.name}</h3><img class="display-picture" src="${recipe.recipe.image}"></button>`
   })
 };
 
@@ -299,10 +299,10 @@ homeButton.addEventListener('click', (e) => {
   showElement(mainPage)
 })
 
-viewPantry.addEventListener('click', (e) => {
-  hideElement(mainPage)
-  showElement(pantryPage)
-})
+// viewPantry.addEventListener('click', (e) => {
+//   hideElement(mainPage)
+//   showElement(pantryPage)
+// })
 
 pantryHomeButton.addEventListener('click', (e) => {
   hideElement(pantryPage)
