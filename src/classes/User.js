@@ -28,7 +28,7 @@ class User {
   };
 
   filterFavoriteNames(name) {
-    const filterFavoriteRecipesByName = this.favorites.filter(favorite =>     favorite.recipe.name.includes(name))
+    const filterFavoriteRecipesByName = this.favorites.filter(favorite => favorite.recipe.name.includes(name))
     return filterFavoriteRecipesByName
   };
 
