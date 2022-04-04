@@ -76,7 +76,6 @@ const getApiData = () => {
   ]).then(data => createDataInstances(data))
 };
 
-
 const createDataInstances = (data) => {
   ingredientList = new Ingredient(data[1].ingredientsData);
   recipeList = new RecipeRepository(data[2].recipeData);
