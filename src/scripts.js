@@ -38,6 +38,7 @@ let viewFavorite = document.querySelector('.display-favorite-recipe-object')
 let searchedFavorites = document.querySelector('.favorites-display-searched-recipes')
 let searchFavoritesModal = document.querySelector('.display-search-favorite-recipe-object')
 let homeButton = document.querySelector('.home-button')
+let clearSearchButton = document.querySelector('.clear-search-button')
 let viewPantry = document.querySelector('.pantry-button')
 let pantryPage = document.querySelector('.pantry-page-wrapper')
 let pantryHomeButton = document.querySelector('.pantry-home-button')
@@ -162,6 +163,7 @@ const searchByTagOrName = (input) => {
     searchedRecipes.innerHTML += `<button class="recipe-list-button" id="${namedRecipe.id}"><h3 class="recipe-titles">${namedRecipe.name}</h3><img class="display-picture" src="${namedRecipe.image}"></button>`
     // displayRecipe(namedRecipe.id)
   })
+  showElement(clearSearchButton)
 }
 
 const showElement = (element) => {
@@ -279,6 +281,8 @@ favoritesClose.addEventListener('click', (e) => {
   favoriteModal.style.display = "none";
   favoritesButtonList.innerHTML = '';
   createFavoritesList()
+  searchedFavorites.innerHTML = "";
+  favoritesSearchInput.value = "";
 })
 
 favoritesSearchInput.addEventListener('keyup', (e) => {
@@ -297,6 +301,14 @@ searchedFavorites.addEventListener('click', (e) => {
 homeButton.addEventListener('click', (e) => {
   hideElement(favoritesPage)
   showElement(mainPage)
+  searchedFavorites.innerHTML = ""
+})
+
+clearSearchButton.addEventListener('click', (e) => {
+  hideElement(clearSearchButton)
+  createRecipeList()
+  searchInput.value = ""
+  // searchedRecipes.innerHTML = ""
 })
 
 // viewPantry.addEventListener('click', (e) => {
