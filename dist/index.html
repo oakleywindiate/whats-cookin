@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <title>Whats Cookin</title>
-    <!-- <link href="styles.css" rel="stylesheet" type="text/css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lekton:wght@700&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
@@ -13,32 +12,25 @@
     <section class="main-page-wrapper">
       <nav>
       <h1>Whats Cookin?</h1>
-      <section class="search-bar-container" id="searchBarContainer">
+      <section class="search-bar-container">
         <div class="search-bar">
           <input type="text" class="search-input" placeholder="What do you want to cook? Type a name of a recipe and press enter">
         </div>
       </section>
-      <section class="menu-section" id="menuSection">
-        <button class="clear-search-button hidden" id="clearSearchButton">CLEAR SEARCH</button>
-        <button class="favorites-button" id="favoritesButton">FAVORITE RECIPES</button>
-        <!-- <button class="pantry-button" id="pantryButton">MY PANTRY</button> -->
-        <button class="recipes-to-cook-button" id="recipesToCookButton">RECIPES TO COOK</button>
+      <section class="menu-section">
+        <button class="clear-search-button hidden">CLEAR SEARCH</button>
+        <button class="favorites-button">FAVORITE RECIPES</button>
+        <button class="recipes-to-cook-button">RECIPES TO COOK</button>
       </section>
       </nav>
       <main>
-        <!-- <section class="featured-recipe-container" id="featuredRecipeContainer">
-          <img>
-          <section class="featured-recipe" id="featuredRecipe">
-            <h2 class="featured-recipe-text" id="featuredRecipeText">Featured Recipe</h2>
-          </section>
-        </section> -->
-        <section class="recipe-list-container" id="recipeListContainer">
-          <section class="recipe-list" id="recipeListId">
+        <section class="recipe-list-container">
+          <section class="recipe-list">
             <!-- recipe list injects here -->
           </section>
         </section>
         <!-- Modal content -->
-        <section id="modal" class="modal">
+        <section class="modal">
           <section class="modal-content">
             <span class="close">&times;</span>
             <section class="display-recipe-object">
@@ -63,23 +55,23 @@
     <section class="favorites-page-wrapper hidden">
       <nav>
       <h1>Whats Cookin</h1>
-      <section class="favorites-search-bar-container" id="favoritesSearchBarContainer">
+      <section class="favorites-search-bar-container">
         <div class="favorites-search-bar">
           <input type="text" class="favorites-search-input" placeholder="Search your favorite recipes...">
         </div>
       </section>
-      <section class="favorites-home-button" id="favoritesHomeButton">
-        <button class="home-button" id="homeButton">Home Button</button>
+      <section class="favorites-home-button">
+        <button class="home-button">Home Button</button>
       </section>
       </nav>
       <main>
-        <section class="favorites-list-container" id="favoritesListContainer">
-          <section class="favorites-list" id="favoritesList">
+        <section class="favorites-list-container">
+          <section class="favorites-list">
             <!-- favorites list injects here -->
           </section>
         </section>
         <!-- Modal content -->
-        <section id="modal" class="favorite-modal">
+        <section class="favorite-modal">
           <section class="modal-content">
             <span class="favorites-close">&times;</span>
             <section class="display-favorite-recipe-object">
@@ -87,24 +79,21 @@
             </section>
             <section class="heart-rtc-buttons-container">
               <div class="favorites-heart-button-container">
-                <!-- <button class="heart-button">&hearts;</button> -->
               </div>
               <div class="favorites-rtc-button-container">
-                <!-- <button class="addRecipeToCook-button">+</button> -->
               </div>
             </section>
           </section>
         </section>
         <section class="favorites-display-searched-recipes">
           <!-- search results inject here -->
-          <section id="modal" class="favorite-modal">
+          <section class="favorite-modal">
             <section class="modal-content">
               <span class="search-favorites-close">&times;</span>
               <section class="display-search-favorite-recipe-object">
                 <!-- recipe details inject here -->
               </section>
               <div class="search-favorites-heart-button-container">
-                <!-- <button class="heart-button">&hearts;</button> -->
               </div>
             </section>
           </section>
@@ -115,23 +104,23 @@
     <section class="rtc-page-wrapper hidden">
       <nav>
       <h1>Whats Cookin</h1>
-      <section class="rtc-search-bar-container" id="rtcSearchBarContainer">
+      <section class="rtc-search-bar-container">
         <div class="rtc-search-bar">
           <input type="text" class="rtc-search-input" placeholder="Search your recipes to cook...">
         </div>
       </section>
-      <section class="rtc-home-button-container" id="rtcHomeButton-container">
-        <button class="rtc-home-button" id="rtchomeButton">Home Button</button>
+      <section class="rtc-home-button-container">
+        <button class="rtc-home-button">Home Button</button>
       </section>
       </nav>
       <main>
-        <section class="rtc-list-container" id="rtcListContainer">
-          <section class="rtc-list" id="rtcList">
+        <section class="rtc-list-container">
+          <section class="rtc-list">
             <!-- rtc list injects here -->
           </section>
         </section>
         <!-- Modal content -->
-        <section id="rtcModal" class="rtc-modal">
+        <section class="rtc-modal">
           <section class="modal-content">
             <span class="rtc-close">&times;</span>
             <section class="display-rtc-recipe-object">
@@ -139,74 +128,23 @@
             </section>
             <section class="heart-rtc-buttons-container">
               <div class="rtc-heart-button-container">
-                <!-- <button class="heart-button">&hearts;</button> -->
               </div>
               <div class="rtc-rtc-button-container">
-                <!-- <button class="addRecipeToCook-button">+</button> -->
               </div>
             </section>
           </section>
         </section>
         <section class="rtc-display-searched-recipes">
           <!-- search results inject here -->
-          <section id="rtcSearchmodal" class="rtc-search-modal">
+          <section class="rtc-search-modal">
             <section class="search-rtc-modal-content">
               <span class="search-rtc-close">&times;</span>
               <section class="display-search-rtc-recipe-object">
                 <!-- recipe details inject here -->
               </section>
               <div class="search-rtc-heart-button-container">
-                <!-- <button class="heart-button">&hearts;</button> -->
-              </div>
+\             </div>
               <div class="sesrch-rtc-button-container">
-                <!-- <button class="addRecipeToCook-button">+</button> -->
-              </div>
-            </section>
-          </section>
-        </section>
-      </main>
-    </section>
-<!-- PANTRY PAGE -->
-    <section class="pantry-page-wrapper hidden">
-      <nav>
-      <h1>Whats Cookin</h1>
-      <section class="pantry-search-bar-container" id="pantrySearchBarContainer">
-        <div class="pantry-search-bar">
-          <input type="text" class="pantry-search-input" placeholder="Search your pantry recipes...">
-        </div>
-      </section>
-      <section class="pantry-home-button" id="pantryHomeButton">
-        <button class="pantry-home-button" id="pantryHomeButton">Home Button</button>
-      </section>
-      </nav>
-      <main>
-        <section class="pantry-list-container" id="pantryListContainer">
-          <section class="pantry-list" id="pantryList">
-            <!-- pantry list injects here -->
-          </section>
-        </section>
-        <!-- Modal content -->
-        <section id="modal" class="pantry-modal">
-          <section class="pantry-modal-content">
-            <span class="pantry-close">&times;</span>
-            <section class="display-pantry-recipe-object">
-              <!-- pantry details inject here -->
-            </section>
-            <div class="heart-button-container">
-              <!-- <button class="heart-button">&hearts;</button> -->
-            </div>
-          </section>
-        </section>
-        <section class="pantry-display-searched-recipes">
-          <!-- search results inject here -->
-          <section id="pantryModal" class="favorite-modal">
-            <section class="modal-content">
-              <span class="search-pantry-close">&times;</span>
-              <section class="display-search-favorite-recipe-object">
-                <!-- pantry details inject here -->
-              </section>
-              <div class="heart-button-container">
-                <!-- <button class="heart-button">&hearts;</button> -->
               </div>
             </section>
           </section>
@@ -214,6 +152,5 @@
       </main>
     </section>
   </body>
-  <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
   <script src="bundle.js"></script>
 </html>
