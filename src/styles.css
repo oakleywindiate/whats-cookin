@@ -33,6 +33,7 @@ h1 {
 h3 {
   font-family: 'Lekton', sans-serif;
   color: #F95624;
+  pointer-events: none;
 }
 
 button {
