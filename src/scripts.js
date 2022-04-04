@@ -2,7 +2,7 @@
 
 import './styles.css';
 import apiCalls from './apiCalls';
-import {usersDataAPI, ingredientsDataAPI, recipesDataAPI, getFetchAll, displayError} from './apiCalls.js';
+import {getFetch} from './apiCalls.js'
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import Ingredient from './classes/Ingredient';
@@ -69,10 +69,13 @@ const getRandomUser = (array) => {
 };
 
 const getApiData = () => {
-  getFetchAll();
-  Promise.all([usersDataAPI, ingredientsDataAPI, recipesDataAPI])
-  .then(data => createDataInstances(data));
+  Promise.all([
+    getFetch('users'),
+    getFetch('ingredients'),
+    getFetch('recipes')
+  ]).then(data => createDataInstances(data))
 };
+
 
 const createDataInstances = (data) => {
   ingredientList = new Ingredient(data[1].ingredientsData);
