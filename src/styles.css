@@ -16,8 +16,11 @@ main {
 }
 
 input {
- width: 50vw;
+ width: 72vw;
  height: 5vh;
+ font-family: 'Lekton', sans-serif;
+ background-color: #FFFBE6;
+ font-size: 19px;
 }
 
 h1 {
@@ -37,17 +40,26 @@ button {
   border: none;
 }
 
-.favorites-button, .pantry-button, .recipes-to-cook-button {
-  padding: 10px;
-  margin: 6px;
+.favorites-button, .recipes-to-cook-button, .rtc-home-button, .home-button {
+  padding: 15px;
+  margin: 25px;
+  color: #FFFBE6;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  background-color: #356859;
 }
 
+/* .rtc-home-button {
+  margin: 5px;
+  padding: 5px;
+} */
+
 .search-bar {
-    margin: 20px;
-    background: #ddd;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
+  margin: 20px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
 }
 
 .menu-section {
@@ -72,7 +84,7 @@ button {
   flex-wrap: wrap;
 }
 
-.recipe-list {
+.recipe-list, .favorites-list, .rtc-list {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -80,13 +92,13 @@ button {
   padding-top: 10px;
 }
 
-.recipe-list-button {
+.recipe-list-button, .favorites-list-button, .rtc-list-button {
   margin: 10px;
-  background-color: #FFFBE6;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  background-color: #FFFBE6;
 }
 
 .recipe-list-button,
@@ -94,6 +106,15 @@ button {
 .rtc-list-button {
   width: 30vw;
   height: 30vh;
+}
+
+/* .display-recipe-object {
+
+} */
+
+.display-recipe-name {
+  text-align: center;
+  font-size: 30px;
 }
 
 .modal,
@@ -114,11 +135,13 @@ button {
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: #FFFBE6;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  font-family: 'Montserrat', sans-serif;
+  color: #356859;
 }
 
 .close,
@@ -126,8 +149,9 @@ button {
 .rtc-close {
   color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  font-size: 50px;
   font-weight: bold;
+  padding: 10px;
 }
 
 .close:hover,
@@ -150,8 +174,9 @@ button {
 .favorites-heart-button-container,
 .rtc-heart-button-container {
   border: none;
-  background-color: white;
+  background-color: #FFFBE6;
   font-size: 40px;
+  display: flex;
 }
 
 .hidden {
