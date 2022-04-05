@@ -18,8 +18,21 @@ To access the application locally:
 - To view tests, run `npm test`
 
 ## Application in Action
+- View a list of all recipes, click on a recipe of interest, and favorite a recipe from the main page.
 
-<!-- Insert Pics and Gifs showcasing the application -->
+![favorites giphy](./assets/favroties-giphy.gif)
+
+- Search the entire list of recipes by a recipe name or by a recipe tag (ex: appetizer, dinner, lunch, snack, etc.)
+
+![search main giphy](./assets/search-main.gif)
+
+- Search your favorite recipes for a particular one you are looking to cook.
+
+![search favorites giphy](./assets/search-favorites.gif)
+
+- In addition to favoriting recipes, you can also add recipes to cook using the plus button next to the favorite heart button.
+
+![add recipes to cook giphy](./assets/add-recipes-to-cook.gif)
 
 ## Technologies Used
 - JavaScript
