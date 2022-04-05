@@ -39,9 +39,25 @@ h3 {
 button {
   cursor: pointer;
   border: none;
+  transition: 100ms;
 }
 
-.favorites-button, .recipes-to-cook-button, .rtc-home-button, .home-button {
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, 0.6), -1px -1px 2px #aaa, 1px 1px 2px #555;
+}
+
+input {
+  border: 3px solid #FFFBE6;
+  padding-left: 10px;
+}
+
+input:focus {
+  outline: none;
+  border: 3px solid #F95624;
+}
+
+.favorites-button, .recipes-to-cook-button, .rtc-home-button, .home-button, .clear-search-button {
   padding: 15px;
   margin: 25px;
   color: #FFFBE6;
@@ -50,10 +66,10 @@ button {
   background-color: #356859;
 }
 
-/* .rtc-home-button {
-  margin: 5px;
-  padding: 5px;
-} */
+.heart-rtc-buttons-container {
+  display: flex;
+  justify-content: center;
+}
 
 .search-bar {
   margin: 20px;
@@ -85,7 +101,7 @@ button {
   flex-wrap: wrap;
 }
 
-.recipe-list, .favorites-list, .rtc-list, .display-searched-recipes {
+.recipe-list, .favorites-list, .rtc-list, .display-searched-recipes, .favorites-display-searched-recipes {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -93,7 +109,14 @@ button {
   padding-top: 10px;
 }
 
-
+.heart-button, .addRecipeToCook-button {
+  font-size: 45px;
+  margin: 20px;
+  background-color: #FFFBE6;
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
+}
 
 .recipe-list-button, .favorites-list-button, .rtc-list-button {
   margin: 10px;
@@ -110,10 +133,6 @@ button {
   width: 30vw;
   height: 30vh;
 }
-
-/* .display-recipe-object {
-
-} */
 
 .display-recipe-name {
   text-align: center;
@@ -169,7 +188,7 @@ button {
 }
 
 .favorites-heart-button-container > .heart-button {
-  color: red;
+  color: #F95624;
 }
 
 .heart-button-container,

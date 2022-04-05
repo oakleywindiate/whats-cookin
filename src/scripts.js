@@ -122,6 +122,7 @@ const displayRecipe = (id, recipeElement, heartElement, rtcElement) => {
 const searchByTagOrName = (input) => {
   const searchTag = recipeList.filterTags(input);
   const searchName = recipeList.filterName(input);
+  searchedRecipes.innerHTML = '';
   const getRecipeByTag = searchTag.map(taggedRecipe => {
     recipeButtonList.innerHTML = '';
     searchedRecipes.innerHTML += `
@@ -164,11 +165,19 @@ const searchFavoritesByTagOrName = (input) => {
   const searchName = user.filterFavoriteNames(input);
   const getRecipeByTag = searchTag.map(taggedRecipe => {
     favoritesButtonList.innerHTML = '';
-    searchedFavorites.innerHTML += `<button class="recipe-list-button" id="${taggedRecipe.recipe.id}">${taggedRecipe.recipe.name}</button>`;
+    searchedFavorites.innerHTML += `
+      <button class="recipe-list-button" id="${taggedRecipe.recipe.id}">
+      <h3 class="favorite-recipe-titles">${taggedRecipe.recipe.name}</h3>
+      <img class="display-picture" src="${taggedRecipe.recipe.image}">
+      </button>`;
   });
   const getRecipeByName = searchName.map(namedRecipe => {
     favoritesButtonList.innerHTML = '';
-    searchedFavorites.innerHTML += `<button class="recipe-list-button" id="${namedRecipe.recipe.id}">${namedRecipe.recipe.name}</button>`;
+    searchedFavorites.innerHTML += `
+      <button class="recipe-list-button" id="${namedRecipe.recipe.id}">
+      <h3 class="favorite-recipe-titles">${namedRecipe.recipe.name}</h3>
+      <img class="display-picture" src="${namedRecipe.recipe.image}">
+      </button>`;
   });
 };
 
@@ -199,7 +208,7 @@ close.addEventListener('click', (e) => {
 heartButton.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id');
   user.favoriteRecipe(targetId, recipeList);
-  event.target.style.color = 'red';
+  event.target.style.color = '#F95624';
 });
 
 searchedRecipes.addEventListener('click', (e) => {
@@ -276,7 +285,7 @@ rtcHomeButton.addEventListener('click', (e) => {
 addRecipesToCookButton.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id');
   user.addRecipesToCook(targetId, recipeList);
-  event.target.style.color = 'red';
+  event.target.style.color = '#F95624';
 });
 
 rtcButtonList.addEventListener('click', (e) => {
