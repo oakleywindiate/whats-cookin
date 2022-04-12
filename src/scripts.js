@@ -104,15 +104,12 @@ const findRecipeId = (id) => {
 
 const displayRecipe = (id, recipeElement, heartElement, rtcElement) => {
   const recipeInfo = findRecipeId(id);
-  const getInstructions = recipeInfo.recipe.instructions.map(instruction => {
-    return instruction.instruction;
-  });
   recipeElement.innerHTML = '';
   recipeElement.innerHTML += `
     <h3 class="display-recipe-name">${recipeInfo.recipe.name}</h3>
-    <p class="instructions">Cooking Directions: ${getInstructions}</p>
+    <p class="instructions">Cooking Directions: ${recipeInfo.getDirections()}</p>
     <p class="ingredients">Ingredients: ${recipeInfo.getIngredient(ingredientList)}</p>
-    <p class="cost">Cost: ${recipeInfo.calculateCost(ingredientList)}</p>`;
+    <p class="cost">Cost: $${recipeInfo.calculateCost(ingredientList)}</p>`;
   heartElement.innerHTML = '';
   heartElement.innerHTML += `<button class="heart-button" id=${recipeInfo.recipe.id}>&hearts;</button>`;
   rtcElement.innerHTML = '';
