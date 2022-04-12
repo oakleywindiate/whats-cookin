@@ -73,7 +73,10 @@ const getApiData = () => {
     getFetch('users'),
     getFetch('ingredients'),
     getFetch('recipes')
-  ]).then(data => createDataInstances(data))
+  ]).then(data => {
+    createDataInstances(data)
+    createRecipeList()
+  });
 };
 
 const createDataInstances = (data) => {
@@ -81,15 +84,14 @@ const createDataInstances = (data) => {
   recipeList = new RecipeRepository(data[2].recipeData);
   userList = new UserRepository(data[0].usersData);
   user = getRandomUser(userList.userObjects);
-  createRecipeList();
 };
 
 const createRecipeList = () => {
   recipeList.recipe.forEach(recipe => {
     recipeButtonList.innerHTML += `
       <button class="recipe-list-button" id="${recipe.recipe.id}">
-      <h3 class="recipe-titles">${recipe.recipe.name}</h3>
-      <img class="display-picture" src="${recipe.recipe.image}">
+      <h2 class="recipe-titles">${recipe.recipe.name}</h2>
+      <img class="display-picture" src="${recipe.recipe.image}" alt="${recipe.recipe.name}">
       </button>`;
   });
 };
@@ -106,7 +108,7 @@ const displayRecipe = (id, recipeElement, heartElement, rtcElement) => {
   const recipeInfo = findRecipeId(id);
   recipeElement.innerHTML = '';
   recipeElement.innerHTML += `
-    <h3 class="display-recipe-name">${recipeInfo.recipe.name}</h3>
+    <h2 class="display-recipe-name">${recipeInfo.recipe.name}</h2>
     <p class="instructions">Cooking Directions: ${recipeInfo.getDirections()}</p>
     <p class="ingredients">Ingredients: ${recipeInfo.getIngredient(ingredientList)}</p>
     <p class="cost">Cost: $${recipeInfo.calculateCost(ingredientList)}</p>`;
@@ -124,16 +126,16 @@ const searchByTagOrName = (input) => {
     recipeButtonList.innerHTML = '';
     searchedRecipes.innerHTML += `
       <button class="recipe-list-button" id="${taggedRecipe.id}">
-      <h3 class="recipe-titles">${taggedRecipe.name}</h3>
-      <img class="display-picture" src="${taggedRecipe.image}">
+      <h2 class="recipe-titles">${taggedRecipe.name}</h2>
+      <img class="display-picture" src="${taggedRecipe.image}" alt="${taggedRecipe.name}">
       </button>`
   });
   const getRecipeByName = searchName.map(namedRecipe => {
     recipeButtonList.innerHTML = '';
     searchedRecipes.innerHTML += `
       <button class="recipe-list-button" id="${namedRecipe.id}">
-      <h3 class="recipe-titles">${namedRecipe.name}</h3>
-      <img class="display-picture" src="${namedRecipe.image}">
+      <h2 class="recipe-titles">${namedRecipe.name}</h2>
+      <img class="display-picture" src="${namedRecipe.image}" alt="${namedRecipe.name}">
       </button>`;
   });
   showElement(clearSearchButton);
@@ -151,8 +153,8 @@ const createFavoritesList = () => {
   user.favorites.forEach(favorite => {
     favoritesButtonList.innerHTML += `
       <button class="favorites-list-button" id="${favorite.recipe.id}">
-      <h3 class="favorite-recipe-titles">${favorite.recipe.name}</h3>
-      <img class="display-picture" src="${favorite.recipe.image}">
+      <h2 class="favorite-recipe-titles">${favorite.recipe.name}</h2>
+      <img class="display-picture" src="${favorite.recipe.image}" alt="${favorite.recipe.name}">
       </button>`;
   });
 };
@@ -164,16 +166,16 @@ const searchFavoritesByTagOrName = (input) => {
     favoritesButtonList.innerHTML = '';
     searchedFavorites.innerHTML += `
       <button class="recipe-list-button" id="${taggedRecipe.recipe.id}">
-      <h3 class="favorite-recipe-titles">${taggedRecipe.recipe.name}</h3>
-      <img class="display-picture" src="${taggedRecipe.recipe.image}">
+      <h2 class="favorite-recipe-titles">${taggedRecipe.recipe.name}</h2>
+      <img class="display-picture" src="${taggedRecipe.recipe.image}" alt="${taggedRecipe.recipe.name}">
       </button>`;
   });
   const getRecipeByName = searchName.map(namedRecipe => {
     favoritesButtonList.innerHTML = '';
     searchedFavorites.innerHTML += `
       <button class="recipe-list-button" id="${namedRecipe.recipe.id}">
-      <h3 class="favorite-recipe-titles">${namedRecipe.recipe.name}</h3>
-      <img class="display-picture" src="${namedRecipe.recipe.image}">
+      <h2 class="favorite-recipe-titles">${namedRecipe.recipe.name}</h2>
+      <img class="display-picture" src="${namedRecipe.recipe.image}" alt="${namedRecipe.recipe.name}">
       </button>`;
   });
 };
@@ -182,8 +184,8 @@ const createRecipesToCookList = () => {
   user.recipesToCook.forEach(recipe => {
     rtcButtonList.innerHTML += `
       <button class="rtc-list-button" id="${recipe.recipe.id}">
-      <h3 class="rtc-titles">${recipe.recipe.name}</h3>
-      <img class="display-picture" src="${recipe.recipe.image}">
+      <h2 class="rtc-titles">${recipe.recipe.name}</h2>
+      <img class="display-picture" src="${recipe.recipe.image}" alt="${recipe.recipe.name}">
       </button>`;
   });
 };
@@ -216,7 +218,7 @@ searchedRecipes.addEventListener('click', (e) => {
 
 searchInput.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
-    let inputValue = e.target.value;
+    let inputValue = e.target.value.toLowerCase();
     searchByTagOrName(inputValue);
   };
 });
@@ -244,7 +246,7 @@ favoritesClose.addEventListener('click', (e) => {
 
 favoritesSearchInput.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
-    let inputValue = e.target.value;
+    let inputValue = e.target.value.toLowerCase();
     searchFavoritesByTagOrName(inputValue);
   };
 });
