@@ -24,6 +24,7 @@ class RecipeRepository {
   createRecipes() {
     const mapRecipe = this.recipeData.map(recipe => {
       const createClass = new Recipe(recipe);
+      createClass.recipe.name = createClass.recipe.name.toLowerCase();
       return createClass;
     });
     return mapRecipe;

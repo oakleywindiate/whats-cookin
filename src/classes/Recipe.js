@@ -5,7 +5,7 @@ class Recipe {
 
   getIngredient(ingredientsData) {
     const findIngredient = this.recipe.ingredients.map(ingredient => ingredientsData.getIngredientName(ingredient.id));
-    return findIngredient;
+    return findIngredient.join(', ');
   }
 
   calculateCost(ingredientsData) {
@@ -13,11 +13,14 @@ class Recipe {
       acc += ingredient.quantity.amount * ingredientsData.getEstimatedCost(ingredient.id);
       return acc;
     }, 0);
-    return getCost;
+    return (getCost / 100).toFixed(2);
   }
 
   getDirections() {
-    return this.recipe.instructions;
+    const getInstructions = this.recipe.instructions.map(instruction => {
+    return instruction.instruction;
+    });
+    return getInstructions.join(' ');
   }
 };
 
