@@ -71,6 +71,12 @@ describe('User', () => {
     expect(user1.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
   });
 
+  it('it should not be able to favorite a recipe more than once', () => {
+    user1.favoriteRecipe("2", recipeRepository);
+    user1.favoriteRecipe("2", recipeRepository);
+    expect(user1.favorites).to.deep.equal([{ recipe: { id: 2, tags: ['hoop', 'baz', 'foo'], name: 'Pasta' } }]);
+  });
+
   it('should be able to filter a favorited recipe by tag', () => {
     user1.favoriteRecipe("1", recipeRepository);
     user1.favoriteRecipe("2", recipeRepository);
@@ -92,6 +98,14 @@ describe('User', () => {
   });
 
   it('should be able to add recipes that a user wants to cook to a list', () => {
+    user1.addRecipesToCook("1", recipeRepository);
+    expect(user1.recipesToCook).to.deep.equal([
+      { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
+    );
+  });
+
+  it(`should not be able to add duplicates of a recipe to cook`, () => {
+    user1.addRecipesToCook("1", recipeRepository);
     user1.addRecipesToCook("1", recipeRepository);
     expect(user1.recipesToCook).to.deep.equal([
       { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
