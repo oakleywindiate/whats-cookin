@@ -53,6 +53,11 @@ let rtcHomeButton = document.querySelector('.rtc-home-button');
 let rtcModal = document.querySelector('.rtc-modal');
 let rtcRtcButton = document.querySelector('.rtc-rtc-button-container');
 
+// --------MY PANTRY PAGE-------- //
+let pantryHomeButton = document.querySelector('.pantry-home-button');
+let pantryButton = document.querySelector('.my-pantry-button');
+let pantryPage = document.querySelector('.my-pantry-wrapper');
+
 
 // ----------------- GLOBAL VARIABLES ----------------- //
 
@@ -301,4 +306,14 @@ favoritesHeartButton.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id');
   user.unfavoriteRecipe(targetId);
   event.target.style.color = 'black';
+});
+
+pantryHomeButton.addEventListener('click', (e) => {
+  hideElement(pantryPage);
+  showElement(mainPage);
+});
+
+pantryButton.addEventListener('click', (e) => {
+  hideElement(mainPage);
+  showElement(pantryPage);
 });
