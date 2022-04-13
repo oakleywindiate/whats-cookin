@@ -57,6 +57,9 @@ let rtcRtcButton = document.querySelector('.rtc-rtc-button-container');
 let pantryHomeButton = document.querySelector('.pantry-home-button');
 let pantryButton = document.querySelector('.my-pantry-button');
 let pantryPage = document.querySelector('.my-pantry-wrapper');
+let addIngredientsButton = document.querySelector('.add-pantry-ingredients-button');
+let pantryModal = document.querySelector('.pantry-modal');
+let pantryClose = document.querySelector('.pantry-close');
 
 
 // ----------------- GLOBAL VARIABLES ----------------- //
@@ -195,6 +198,7 @@ const createRecipesToCookList = () => {
   });
 };
 
+
 // ----------------- EVENT LISTENERS ----------------- //
 
 window.addEventListener('load', getApiData);
@@ -316,4 +320,12 @@ pantryHomeButton.addEventListener('click', (e) => {
 pantryButton.addEventListener('click', (e) => {
   hideElement(mainPage);
   showElement(pantryPage);
+});
+
+addIngredientsButton.addEventListener('click', (e) => {
+  pantryModal.style.display = 'block';
+});
+
+pantryClose.addEventListener('click', (e) => {
+  pantryModal.style.display = 'none';
 });
