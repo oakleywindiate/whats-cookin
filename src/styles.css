@@ -57,7 +57,7 @@ input:focus {
   border: 3px solid #F95624;
 }
 
-.favorites-button, .recipes-to-cook-button, .rtc-home-button, .home-button, .clear-search-button {
+.favorites-button, .recipes-to-cook-button, .rtc-home-button, .home-button, .clear-search-button, .my-pantry-button, .pantry-home-button {
   padding: 15px;
   margin: 25px;
   color: #FFFBE6;
