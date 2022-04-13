@@ -153,41 +153,46 @@
       </main>
     </section>
     <!-- MY PANTRY PAGE -->
-        <section class="my-pantry-wrapper hidden">
-          <nav>
-          <h1>Whats Cookin?</h1>
+    <section class="my-pantry-wrapper hidden">
+      <nav>
+        <h1>Whats Cookin?</h1>
           <!-- <section class="rtc-search-bar-container">
             <div class="rtc-search-bar">
               <input type="text" class="rtc-search-input" placeholder="Search your recipes to cook...">
             </div>
           </section> -->
-          <section class="pantry-home-button-container">
-            <button class="pantry-home-button">Home</button>
-          </section>
-          </nav>
-          <main>
-            <section class="pantry-list-container">
-              <section class="pantry-ingredient-list">
-                <!-- ingredients injects here -->
-              </section>
-            </section>
-            <!-- Modal form content -->
-            <!-- <section class="pantry-modal">
-              <section class="modal-content">
-                <span class="pantry-close">&times;</span>
-                <section class="display-pantry"> -->
-                  <!-- recipe details inject here -->
-                <!-- </section>
-                <section class="heart-rtc-buttons-container">
-                  <div class="rtc-heart-button-container">
-                  </div>
-                  <div class="rtc-rtc-button-container">
-                  </div>
-                </section>
-              </section>
-            </section> -->
-          </main>
+        <section class="pantry-home-button-container">
+          <button class="pantry-home-button">Home</button>
+          <button class="add-pantry-ingredients-button">Add Ingredients</button>
         </section>
+      </nav>
+      <main>
+        <section class="pantry-list-container">
+          <section class="pantry-ingredient-list">
+                <!-- ingredients injects here -->
+          </section>
+        </section>
+        <!-- Modal content -->
+        <section class="pantry-modal">
+          <section class="modal-content">
+            <span class="pantry-close">&times;</span>
+            <section class="display-pantry-form">
+              <form id="pantryForm" name="pantryForm">
+                <div>
+                  <label for="userId">User ID:</label>
+                  <input type="text" id="userId" placeholder="Enter ID here" name="userId" required>
+                  <label for="ingredientId">Ingredient ID:</label>
+                  <input type="text" id="ingredientId" placeholder="Enter ingredients here"name="ingredientId" required>
+                  <label for="ingredientModification">Ingredient Modification:</label>
+                  <input type="text" id="ingredientModification" placeholder="Enter the number of ingredients modified here"name="ingredientModification" required>
+                </div>
+                <input type="submit" value="Submit!">
+              </form>
+            </section>
+          </section>
+        </section>
+      </main>
+    </section>
   </body>
   <script src="bundle.js"></script>
 </html>
