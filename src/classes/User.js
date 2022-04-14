@@ -50,15 +50,25 @@ class User {
     return pantryList
   }
 
-  determineAmountOfIngredients() {
+  determineAmountOfIngredients(recipeId, recipeRepository) {
+    const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients
+    const pantryData = this.userData.pantry.map(pantry => pantry.ingredient)
+    const compareIngredientId = recipeObj.find(ingredient => {
+      return pantryData.includes(ingredient.id)
+    })
+    console.log("compare", compareIngredientId)
+    return compareIngredientId
+    // see if ingedients match
+    // pass in id
+    // if recipesToCook.includes(name)
     // determing if recipes in RTC if (!ingredient) {
     // return get this ingredient and cant cook it('
     // if it is in there then compare
     // pantry.amount > recipesToCook.amount
     // if left is larger than right allow to cook
-    
-    });
-  }
+    // return "you don't have enough to cook this" message box injected
+    // grey out button
+    }
 };
 
 export default User;
