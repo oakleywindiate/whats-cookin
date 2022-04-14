@@ -1,4 +1,5 @@
 import RecipeRepository from './RecipeRepository'
+import Ingredient from './Ingredient'
 
 class User {
   constructor(userData) {
@@ -37,6 +38,26 @@ class User {
     if (!this.recipesToCook.includes(recipeObject)) {
       this.recipesToCook.push(recipeRepository.findRecipeById(id));
     };
+  }
+
+  getPantryInfo(ingredientData) {
+    const pantryList = this.userData.pantry.map(ingredient => {
+      return {
+        name: ingredientData.getIngredientName(ingredient.ingredient),
+        amount: ingredient.amount
+      }
+    })
+    return pantryList
+  }
+
+  determineAmountOfIngredients() {
+    // determing if recipes in RTC if (!ingredient) {
+    // return get this ingredient and cant cook it('
+    // if it is in there then compare
+    // pantry.amount > recipesToCook.amount
+    // if left is larger than right allow to cook
+    
+    });
   }
 };
 
