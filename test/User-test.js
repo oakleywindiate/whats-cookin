@@ -2,25 +2,28 @@ import { expect } from 'chai';
 import User from '../src/classes/User';
 import Recipe from '../src/classes/Recipe';
 import RecipeRepository from '../src/classes/RecipeRepository';
+import Ingredient from '../src/classes/Ingredient';
 
 describe('User', () => {
-  let user, user1, recipeData, recipeRepository;
+  let user, user1, recipeData, recipeRepository, ingredientData, ingredientsData;
 
   beforeEach(() => {
+
     user = {
         name: "Saige O'Kon",
         id: 1,
         pantry: [
           {
-            "ingredient": 11297,
+            "ingredient": 1,
             "amount": 4
           },
           {
-            "ingredient": 1082047,
+            "ingredient": 2,
             "amount": 10
           }
         ]
       };
+
     recipeData = [
       {
         id: 1,
@@ -43,8 +46,27 @@ describe('User', () => {
         name: 'Pineapple Pizza'
       }
     ];
+
+    ingredientsData = [
+        {
+          "id": 1,
+          "name": "wheat flour",
+          "estimatedCostInCents": 142
+        },
+        {
+          "id": 2,
+          "name": "bicarbonate of soda",
+          "estimatedCostInCents": 582
+        },
+        {
+          "id": 3,
+          "name": "eggs",
+          "estimatedCostInCents": 472
+        }
+      ];
     recipeRepository = new RecipeRepository(recipeData);
     user1 = new User(user);
+    ingredientData = new Ingredient(ingredientsData)
   });
 
   it('Should be a function', () => {
@@ -104,11 +126,27 @@ describe('User', () => {
     );
   });
 
-  it(`should not be able to add duplicates of a recipe to cook`, () => {
+  it('should not be able to add duplicates of a recipe to cook', () => {
     user1.addRecipesToCook("1", recipeRepository);
     user1.addRecipesToCook("1", recipeRepository);
     expect(user1.recipesToCook).to.deep.equal([
       { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
     );
   });
+
+  it.only('should create a list of ingredients in a users pantry', () => {
+    user1.getPantryInfo(ingredientData);
+    console.log("ingredients", user1.getPantryInfo(ingredientData))
+    expect(user1.getPantryInfo(ingredientData)).to.deep.equal([
+      {
+      "amount": 4,
+       "name": "wheat flour"
+     },
+     {
+      "amount": 10,
+       "name": "bicarbonate of soda"
+     }]
+    );
+  });
+
 });
