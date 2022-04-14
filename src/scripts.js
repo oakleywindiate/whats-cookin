@@ -189,6 +189,7 @@ const searchFavoritesByTagOrName = (input) => {
 };
 
 const createRecipesToCookList = () => {
+  console.log("recipestocook", user.recipesToCook)
   user.recipesToCook.forEach(recipe => {
     rtcButtonList.innerHTML += `
       <button class="rtc-list-button" id="${recipe.recipe.id}">

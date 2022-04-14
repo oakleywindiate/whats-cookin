@@ -28,22 +28,54 @@ describe('User', () => {
       {
         id: 1,
         tags: ['foo', 'baz', 'bat'],
-        name: 'Pizza'
+        name: 'Pizza',
+        ingredients: [
+          {
+            id: 1,
+            quantity: {amount: 1.5, unit: 'cups'}
+          },
+          {
+            id: 2,
+            quantity: {amount: 1, unit: 'tablespoon'}
+          }
+        ]
       },
       {
         id: 2,
         tags: ['hoop', 'baz', 'foo'],
-        name: 'Pasta'
+        name: 'Pasta',
+        ingredients: [
+          {
+            id: 3,
+            quantity: {amount: 2, unit: 'cups'}
+          },
+          {
+            id: 4,
+            quantity: {amount: 1, unit: 'servings'}
+          }
+        ]
       },
       {
         id: 3,
         tags: ['hoop', 'baz', 'goop'],
-        name: 'Salad'
+        name: 'Salad',
+        ingredients: [
+          {
+            id: 3,
+            quantity: {amount: 2, unit: 'cups'}
+          },
+        ]
       },
       {
         id: 4,
         tags: ['baz', 'tee', 'goop'],
-        name: 'Pineapple Pizza'
+        name: 'Pineapple Pizza',
+        ingredients: [
+          {
+            id: 1,
+            quantity: {amount: 1, unit: 'cups'}
+          },
+        ]
       }
     ];
 
@@ -134,7 +166,7 @@ describe('User', () => {
     );
   });
 
-  it.only('should create a list of ingredients in a users pantry', () => {
+  it('should create a list of ingredients in a users pantry', () => {
     user1.getPantryInfo(ingredientData);
     console.log("ingredients", user1.getPantryInfo(ingredientData))
     expect(user1.getPantryInfo(ingredientData)).to.deep.equal([
@@ -146,6 +178,14 @@ describe('User', () => {
       "amount": 10,
        "name": "bicarbonate of soda"
      }]
+    );
+  });
+
+  it.only('should not be able to add duplicates of a recipe to cook', () => {
+
+    user1.determineAmountOfIngredients("1", recipeRepository);
+    expect(user1.recipesToCook).to.deep.equal([
+      { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
     );
   });
 
