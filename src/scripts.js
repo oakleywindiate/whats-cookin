@@ -53,6 +53,14 @@ let rtcHomeButton = document.querySelector('.rtc-home-button');
 let rtcModal = document.querySelector('.rtc-modal');
 let rtcRtcButton = document.querySelector('.rtc-rtc-button-container');
 
+// --------MY PANTRY PAGE-------- //
+let pantryHomeButton = document.querySelector('.pantry-home-button');
+let pantryButton = document.querySelector('.my-pantry-button');
+let pantryPage = document.querySelector('.my-pantry-wrapper');
+let addIngredientsButton = document.querySelector('.add-pantry-ingredients-button');
+let pantryModal = document.querySelector('.pantry-modal');
+let pantryClose = document.querySelector('.pantry-close');
+
 
 // ----------------- GLOBAL VARIABLES ----------------- //
 
@@ -181,6 +189,7 @@ const searchFavoritesByTagOrName = (input) => {
 };
 
 const createRecipesToCookList = () => {
+  console.log("recipestocook", user.recipesToCook)
   user.recipesToCook.forEach(recipe => {
     rtcButtonList.innerHTML += `
       <button class="rtc-list-button" id="${recipe.recipe.id}">
@@ -189,6 +198,7 @@ const createRecipesToCookList = () => {
       </button>`;
   });
 };
+
 
 // ----------------- EVENT LISTENERS ----------------- //
 
@@ -301,4 +311,22 @@ favoritesHeartButton.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id');
   user.unfavoriteRecipe(targetId);
   event.target.style.color = 'black';
+});
+
+pantryHomeButton.addEventListener('click', (e) => {
+  hideElement(pantryPage);
+  showElement(mainPage);
+});
+
+pantryButton.addEventListener('click', (e) => {
+  hideElement(mainPage);
+  showElement(pantryPage);
+});
+
+addIngredientsButton.addEventListener('click', (e) => {
+  pantryModal.style.display = 'block';
+});
+
+pantryClose.addEventListener('click', (e) => {
+  pantryModal.style.display = 'none';
 });

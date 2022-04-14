@@ -57,7 +57,14 @@ input:focus {
   border: 3px solid #F95624;
 }
 
-.favorites-button, .recipes-to-cook-button, .rtc-home-button, .home-button, .clear-search-button {
+.favorites-button,
+.recipes-to-cook-button,
+.rtc-home-button,
+.home-button,
+.clear-search-button,
+.my-pantry-button,
+.pantry-home-button,
+.add-pantry-ingredients-button {
   padding: 15px;
   margin: 25px;
   color: #FFFBE6;
@@ -101,7 +108,11 @@ input:focus {
   flex-wrap: wrap;
 }
 
-.recipe-list, .favorites-list, .rtc-list, .display-searched-recipes, .favorites-display-searched-recipes {
+.recipe-list,
+.favorites-list,
+.rtc-list,
+.display-searched-recipes,
+.favorites-display-searched-recipes {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -118,7 +129,9 @@ input:focus {
   width: 50px;
 }
 
-.recipe-list-button, .favorites-list-button, .rtc-list-button {
+.recipe-list-button,
+.favorites-list-button,
+.rtc-list-button {
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -142,7 +155,8 @@ input:focus {
 .modal,
 .favorite-modal,
 .rtc-modal,
-.rtc-search-modal {
+.rtc-search-modal,
+.pantry-modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -168,7 +182,8 @@ input:focus {
 
 .close,
 .favorites-close,
-.rtc-close {
+.rtc-close,
+.pantry-close {
   color: #aaaaaa;
   float: right;
   font-size: 50px;
@@ -181,7 +196,9 @@ input:focus {
 .favorites-close:hover,
 .favorites-close:focus,
 .rtc-close:hover,
-.rtc-close:focus {
+.rtc-close:focus,
+.pantry-close:hover,
+.pantry-close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
