@@ -50,33 +50,33 @@ class User {
     return pantryList
   }
 
-  determineAmountOfIngredients(recipeId, recipeRepository) {
-    const ingredientsNeeded = [];
+  determineIngredientsNeeded(recipeId, recipeRepository, ingredientData) {
+    const ingredientsNeededById = [];
     const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients
     const pantryData = this.userData.pantry.map(pantry => pantry.ingredient)
-    const pantryAmount = this.userData.pantry.map(pantry => pantry.amount)
-    console.log("pantryAmount", pantryAmount)
-    // if the ids match each favoritesHeartButton
-    const compareIngredientId = recipeObj.filter(ingredient => pantryData.includes(ingredient.id))
-    const compareIngredientAmt = compareIngredientId.forEach(ingredient => {
-      console.log(this.userData.pantry)
-      console.log("pantryData", pantryData)
-      if (ingredient.quantity.amount > pantryData) {
-        ingredientsNeeded.push(ingredient)
+
+    // iterate through recipe ingredients and see if it exists in pantry. if it does but doesn't have enough, push it to the ingredients needed array
+    this.userData.pantry.forEach(pantryIngredient => {
+      recipeObj.forEach(recipeIngredient => {
+        if ((pantryIngredient.ingredient === recipeIngredient.id) && (pantryIngredient.amount < recipeIngredient.quantity.amount)) {
+          ingredientsNeededById.push(recipeIngredient.id)
+        }
+      })
+    })
+
+    // iterate through recipe ingredients and see if it exists in pantry. if it does but doesn't have enough, push it to the ingredients needed array
+    recipeObj.forEach(recipeIngredient => {
+      if (!pantryData.includes(recipeIngredient.id)) {
+        ingredientsNeededById.push(recipeIngredient.id)
       }
     })
-    console.log("ing", ingredientsNeeded)
-    // see if ingedients match
-    // pass in id
-    // if recipesToCook.includes(name)
-    // determing if recipes in RTC if (!ingredient) {
-    // return get this ingredient and cant cook it('
-    // if it is in there then compare
-    // pantry.amount > recipesToCook.amount
-    // if left is larger than right allow to cook
-    // return "you don't have enough to cook this" message box injected
-    // grey out button
-    // end result = an array of ingredients that the user does not have enough of
+
+    // turn the ingredient IDs into the names
+    const ingredientsNeededByName = ingredientsNeededById.map(ingredientId => {
+      return ingredientData.getIngredientName(ingredientId)
+    })
+
+    return ingredientsNeededByName
     }
 };
 
