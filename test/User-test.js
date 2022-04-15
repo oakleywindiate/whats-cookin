@@ -36,7 +36,11 @@ describe('User', () => {
           },
           {
             id: 2,
-            quantity: {amount: 1, unit: 'tablespoon'}
+            quantity: {amount: 40, unit: 'tablespoon'}
+          },
+          {
+            id: 4,
+            quantity: {amount: 40, unit: 'tablespoon'}
           }
         ]
       },
@@ -72,7 +76,7 @@ describe('User', () => {
         name: 'Pineapple Pizza',
         ingredients: [
           {
-            id: 6,
+            id: 5,
             quantity: {amount: 1, unit: 'cups'}
           },
         ]
@@ -94,6 +98,16 @@ describe('User', () => {
           "id": 3,
           "name": "eggs",
           "estimatedCostInCents": 472
+        },
+        {
+          "id": 4,
+          "name": "sugar",
+          "estimatedCostInCents": 16
+        },
+        {
+          "id": 5,
+          "name": "salt",
+          "estimatedCostInCents": 10
         }
       ];
     recipeRepository = new RecipeRepository(recipeData);
@@ -183,8 +197,8 @@ describe('User', () => {
 
   it.only('should not be able to add duplicates of a recipe to cook', () => {
 
-    user1.determineAmountOfIngredients("1", recipeRepository);
-    user1.determineAmountOfIngredients("4", recipeRepository);
+    user1.determineIngredientsNeeded("1", recipeRepository, ingredientData);
+    user1.determineIngredientsNeeded("4", recipeRepository, ingredientData);
     expect(user1.recipesToCook).to.deep.equal([
       { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
     );
