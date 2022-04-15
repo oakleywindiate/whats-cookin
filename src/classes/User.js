@@ -51,13 +51,21 @@ class User {
   }
 
   determineAmountOfIngredients(recipeId, recipeRepository) {
+    const ingredientsNeeded = [];
     const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients
     const pantryData = this.userData.pantry.map(pantry => pantry.ingredient)
-    const compareIngredientId = recipeObj.find(ingredient => {
-      return pantryData.includes(ingredient.id)
+    const pantryAmount = this.userData.pantry.map(pantry => pantry.amount)
+    console.log("pantryAmount", pantryAmount)
+    // if the ids match each favoritesHeartButton
+    const compareIngredientId = recipeObj.filter(ingredient => pantryData.includes(ingredient.id))
+    const compareIngredientAmt = compareIngredientId.forEach(ingredient => {
+      console.log(this.userData.pantry)
+      console.log("pantryData", pantryData)
+      if (ingredient.quantity.amount > pantryData) {
+        ingredientsNeeded.push(ingredient)
+      }
     })
-    console.log("compare", compareIngredientId)
-    return compareIngredientId
+    console.log("ing", ingredientsNeeded)
     // see if ingedients match
     // pass in id
     // if recipesToCook.includes(name)
@@ -68,6 +76,7 @@ class User {
     // if left is larger than right allow to cook
     // return "you don't have enough to cook this" message box injected
     // grey out button
+    // end result = an array of ingredients that the user does not have enough of
     }
 };
 

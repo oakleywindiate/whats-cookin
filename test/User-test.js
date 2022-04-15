@@ -72,7 +72,7 @@ describe('User', () => {
         name: 'Pineapple Pizza',
         ingredients: [
           {
-            id: 1,
+            id: 6,
             quantity: {amount: 1, unit: 'cups'}
           },
         ]
@@ -184,6 +184,7 @@ describe('User', () => {
   it.only('should not be able to add duplicates of a recipe to cook', () => {
 
     user1.determineAmountOfIngredients("1", recipeRepository);
+    user1.determineAmountOfIngredients("4", recipeRepository);
     expect(user1.recipesToCook).to.deep.equal([
       { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
     );
