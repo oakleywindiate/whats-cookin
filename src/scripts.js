@@ -93,6 +93,7 @@ const createDataInstances = (data) => {
   recipeList = new RecipeRepository(data[2]);
   userList = new UserRepository(data[0]);
   user = getRandomUser(userList.userObjects);
+  console.log(user);
 };
 
 const displayPantryIngredients = () => {
@@ -149,6 +150,8 @@ const checkPantryInfo = (recipeId, recipeRepository, ingredientData) => {
     // inject p into modal saying you are missing x, y, ingredients
     viewRecipesToCook.innerHTML += `
     <p class="ingredients-needed">Oops! You don't have enough ingredients to cook this meal 😭 You need ${ingredientsNeeded.join(', ')}.</p>`
+  } else {
+    viewRecipesToCook.innerHTML += `<button class="cook-recipe-button">COOK RECIPE</button>`
   }
   console.log(ingredientsNeeded);
   console.log(findRecipeId(recipeId));
