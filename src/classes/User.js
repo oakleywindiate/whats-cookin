@@ -50,24 +50,33 @@ class User {
     return pantryList
   }
 
-  determineAmountOfIngredients(recipeId, recipeRepository) {
+  determineIngredientsNeeded(recipeId, recipeRepository, ingredientData) {
+    const ingredientsNeededById = [];
     const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients
     const pantryData = this.userData.pantry.map(pantry => pantry.ingredient)
-    const compareIngredientId = recipeObj.find(ingredient => {
-      return pantryData.includes(ingredient.id)
+
+    // iterate through recipe ingredients and see if it exists in pantry. if it does but doesn't have enough, push it to the ingredients needed array
+    this.userData.pantry.forEach(pantryIngredient => {
+      recipeObj.forEach(recipeIngredient => {
+        if ((pantryIngredient.ingredient === recipeIngredient.id) && (pantryIngredient.amount <= recipeIngredient.quantity.amount)) {
+          ingredientsNeededById.push(recipeIngredient.id)
+        }
+      })
     })
-    console.log("compare", compareIngredientId)
-    return compareIngredientId
-    // see if ingedients match
-    // pass in id
-    // if recipesToCook.includes(name)
-    // determing if recipes in RTC if (!ingredient) {
-    // return get this ingredient and cant cook it('
-    // if it is in there then compare
-    // pantry.amount > recipesToCook.amount
-    // if left is larger than right allow to cook
-    // return "you don't have enough to cook this" message box injected
-    // grey out button
+
+    // iterate through recipe ingredients and see if it exists in pantry. if it does but doesn't have enough, push it to the ingredients needed array
+    recipeObj.forEach(recipeIngredient => {
+      if (!pantryData.includes(recipeIngredient.id)) {
+        ingredientsNeededById.push(recipeIngredient.id)
+      }
+    })
+
+    // turn the ingredient IDs into the names
+    const ingredientsNeededByName = ingredientsNeededById.map(ingredientId => {
+      return ingredientData.getIngredientName(ingredientId)
+    })
+
+    return ingredientsNeededByName
     }
 };
 
