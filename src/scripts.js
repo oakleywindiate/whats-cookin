@@ -2,7 +2,7 @@
 
 import './styles.css';
 import apiCalls from './apiCalls';
-import {getFetch} from './apiCalls.js'
+import {getFetch, addIngredients} from './apiCalls.js'
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import Ingredient from './classes/Ingredient';
@@ -62,6 +62,8 @@ let pantryModal = document.querySelector('.pantry-modal');
 let pantryClose = document.querySelector('.pantry-close');
 let pantryList = document.querySelector('.pantry-list');
 
+const form = document.querySelector('#pantryForm');
+
 
 // ----------------- GLOBAL VARIABLES ----------------- //
 
@@ -88,6 +90,31 @@ const getApiData = () => {
   });
 };
 
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const newIngredient = {
+    userID: parseInt(formData.get('userId')),
+    ingredientID: parseInt(formData.get('ingredientId')),
+    ingredientModification: parseInt(formData.get('ingredientModification'))
+  };
+  console.log(newIngredient.userID)
+  addIngredients(newIngredient);
+  e.target.reset();
+  refreshPantry(newIngredient.userID)
+});
+
+const refreshPantry = (userId) => {
+  Promise.all([
+    getFetch('users'),
+    getFetch('ingredients'),
+    getFetch('recipes')
+  ]).then(data => {
+    refreshDataInstances(data, userId)
+
+  })
+}
+
 const createDataInstances = (data) => {
   ingredientList = new Ingredient(data[1]);
   recipeList = new RecipeRepository(data[2]);
@@ -96,9 +123,42 @@ const createDataInstances = (data) => {
   console.log(user);
 };
 
+
+
+const refreshDataInstances = (data, userId) => {
+  getFetch('users')
+  ingredientList = new Ingredient(data[1]);
+  recipeList = new RecipeRepository(data[2]);
+  userList = new UserRepository(data[0]);
+  console.log("userList", userList)
+  console.log("userListId", userList.userData.id)
+  console.log("userListObjects", userList.userObjects)
+  console.log("userId", userId)
+  const findUser = () => {
+    // const returnUser = userList.find(user => {
+    //   userList.userData.forEach(id => console.log(id))
+    // })
+    // return returnUser
+    userList.userObjects.forEach(user1 => {
+      if (user1.userData.id === userId) {
+        console.log("user1", user1)
+        user.userData.pantry = user1.userData.pantry
+      }
+    })
+    console.log("updated user", user)
+  }
+
+  // iterate over userList.userData to see where
+  findUser();
+
+  // console.log(user);
+};
+
 const displayPantryIngredients = () => {
+  console.log("displaypantryuser", ingredientList)
   let pantryData = user.getPantryInfo(ingredientList)
   console.log(pantryData);
+  pantryList.innerHTML = "";
     pantryData.forEach(ingredient => {
       pantryList.innerHTML += `
         <li class="pantry-ingredient-info">
@@ -362,4 +422,8 @@ addIngredientsButton.addEventListener('click', (e) => {
 
 pantryClose.addEventListener('click', (e) => {
   pantryModal.style.display = 'none';
+  displayPantryIngredients()
 });
+
+
+export default refreshPantry;
