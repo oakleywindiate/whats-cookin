@@ -58,7 +58,7 @@ class User {
     // iterate through recipe ingredients and see if it exists in pantry. if it does but doesn't have enough, push it to the ingredients needed array
     this.userData.pantry.forEach(pantryIngredient => {
       recipeObj.forEach(recipeIngredient => {
-        if ((pantryIngredient.ingredient === recipeIngredient.id) && (pantryIngredient.amount <= recipeIngredient.quantity.amount)) {
+        if ((pantryIngredient.ingredient === recipeIngredient.id) && (pantryIngredient.amount < recipeIngredient.quantity.amount)) {
           ingredientsNeededById.push(recipeIngredient.id)
         }
       })
@@ -77,7 +77,18 @@ class User {
     })
 
     return ingredientsNeededByName
-    }
+  }
+
+// pantry is an array of objects
+  // have a function that takes in a recipe param and finds the ingredients amount of that recipe and reduces our pantry by those amounts
+  // removeRecipeIngredientsFromPantry(recipeId, recipeRepository) {
+  //   const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients
+  //
+  //   const pantryData = this.userData.pantry.map(pantry => pantry.ingredient)
+  //   console.log("pantry: ", pantryData)
+  // }
+
 };
+
 
 export default User;

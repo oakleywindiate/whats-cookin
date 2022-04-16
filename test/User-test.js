@@ -195,7 +195,7 @@ describe('User', () => {
     );
   });
 
-  it.only('should not be able to add duplicates of a recipe to cook', () => {
+  it('should be able to determine ingredients needed from a users pantry to cook a recipe', () => {
 
     user1.determineIngredientsNeeded("1", recipeRepository, ingredientData);
     user1.determineIngredientsNeeded("4", recipeRepository, ingredientData);
@@ -203,5 +203,14 @@ describe('User', () => {
       { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
     );
   });
+
+  // it.only('should remove recipe ingredients from a users pantry', () => {
+  //
+  //   user1.removeRecipeIngredientsFromPantry("1", recipeRepository);
+  //   // user1.removeRecipeIngredientsFromPantry("4", recipeRepository);
+  //   expect(user1.recipesToCook).to.deep.equal([
+  //     { recipe: { id: 1, tags: ['foo', 'baz', 'bat'], name: 'Pizza' } }]
+  //   );
+  // });
 
 });
