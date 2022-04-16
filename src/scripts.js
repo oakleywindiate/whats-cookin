@@ -60,6 +60,7 @@ let pantryPage = document.querySelector('.my-pantry-wrapper');
 let addIngredientsButton = document.querySelector('.add-pantry-ingredients-button');
 let pantryModal = document.querySelector('.pantry-modal');
 let pantryClose = document.querySelector('.pantry-close');
+let pantryList = document.querySelector('.pantry-list');
 
 
 // ----------------- GLOBAL VARIABLES ----------------- //
@@ -88,10 +89,22 @@ const getApiData = () => {
 };
 
 const createDataInstances = (data) => {
-  ingredientList = new Ingredient(data[1].ingredientsData);
-  recipeList = new RecipeRepository(data[2].recipeData);
-  userList = new UserRepository(data[0].usersData);
+  ingredientList = new Ingredient(data[1]);
+  recipeList = new RecipeRepository(data[2]);
+  userList = new UserRepository(data[0]);
   user = getRandomUser(userList.userObjects);
+};
+
+const displayPantryIngredients = () => {
+  let pantryData = user.getPantryInfo(ingredientList)
+  console.log(pantryData);
+    pantryData.forEach(ingredient => {
+      pantryList.innerHTML += `
+        <li class="pantry-ingredient-info">
+          <h3 class="pantry-ingredient-title">${ingredient.name}</h3>
+          <p class="pantry-ingredient-amount">Amount: ${ingredient.amount}</p>
+        </li>`
+    })
 };
 
 const createRecipeList = () => {
@@ -124,6 +137,21 @@ const displayRecipe = (id, recipeElement, heartElement, rtcElement) => {
   heartElement.innerHTML += `<button class="heart-button" id=${recipeInfo.recipe.id}>&hearts;</button>`;
   rtcElement.innerHTML = '';
   rtcElement.innerHTML += `<button class="addRecipeToCook-button" id=${recipeInfo.recipe.id}>+</button>`;
+};
+
+
+// if recipe element is RTC, then add html to RTC modal
+
+const checkPantryInfo = (recipeId, recipeRepository, ingredientData) => {
+  const ingredientsNeeded = user.determineIngredientsNeeded(recipeId, recipeRepository, ingredientData);
+  // 2 scenarios
+  if (ingredientsNeeded.length) {
+    // inject p into modal saying you are missing x, y, ingredients
+    viewRecipesToCook.innerHTML += `
+    <p class="ingredients-needed">Oops! You don't have enough ingredients to cook this meal 😭 You need ${ingredientsNeeded.join(', ')}.</p>`
+  }
+  console.log(ingredientsNeeded);
+  console.log(findRecipeId(recipeId));
 };
 
 const searchByTagOrName = (input) => {
@@ -189,7 +217,6 @@ const searchFavoritesByTagOrName = (input) => {
 };
 
 const createRecipesToCookList = () => {
-  console.log("recipestocook", user.recipesToCook)
   user.recipesToCook.forEach(recipe => {
     rtcButtonList.innerHTML += `
       <button class="rtc-list-button" id="${recipe.recipe.id}">
@@ -300,6 +327,8 @@ addRecipesToCookButton.addEventListener('click', (e) => {
 rtcButtonList.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id');
   displayRecipe(targetId, viewRecipesToCook, rtcHeartButton, rtcRtcButton);
+  checkPantryInfo(targetId, recipeList, ingredientList);
+  // call RTC pantry function
   rtcModal.style.display = 'block';
 });
 
@@ -321,6 +350,7 @@ pantryHomeButton.addEventListener('click', (e) => {
 pantryButton.addEventListener('click', (e) => {
   hideElement(mainPage);
   showElement(pantryPage);
+  displayPantryIngredients(ingredientList);
 });
 
 addIngredientsButton.addEventListener('click', (e) => {
