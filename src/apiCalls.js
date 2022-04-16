@@ -1,4 +1,4 @@
-const form = document.querySelector('#pantryForm');
+import refreshPantry from './scripts.js';
 
 const getFetch = (address) => {
   return fetch(`http://localhost:3001/api/v1/${address}`)
@@ -14,23 +14,17 @@ const addIngredients = (newIngredient) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newIngredient)
   })
-  .then(response => response.json())
-  .then(response => console.log(response));
-  // .then(animal => addAnimalToPage(animal));
+  //if the response returns back ok, then get fetch user recipeInfo
+  .then(response => {
+    if (!response.ok) {
+      throw Error()
+    } else {
+      return response.json()
+    }
+  })
+  .then(response => refreshPantry(newIngredient.userID))
 }
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const newIngredient = {
-    userID: parseInt(formData.get('userId')),
-    ingredientID: parseInt(formData.get('ingredientId')),
-    ingredientModification: parseInt(formData.get('ingredientModification'))
-  };
-  console.log(newIngredient)
-  addIngredients(newIngredient);
-  e.target.reset();
-  getFetch("users");
-});
 
-export {getFetch};
+
+export {getFetch, addIngredients};
