@@ -58,7 +58,7 @@ class User {
     // iterate through recipe ingredients and see if it exists in pantry. if it does but doesn't have enough, push it to the ingredients needed array
     this.userData.pantry.forEach(pantryIngredient => {
       recipeObj.forEach(recipeIngredient => {
-        if ((pantryIngredient.ingredient === recipeIngredient.id) && (pantryIngredient.amount < recipeIngredient.quantity.amount)) {
+        if ((pantryIngredient.ingredient === recipeIngredient.id) && (pantryIngredient.amount <= recipeIngredient.quantity.amount)) {
           ingredientsNeededById.push(recipeIngredient.id)
         }
       })
