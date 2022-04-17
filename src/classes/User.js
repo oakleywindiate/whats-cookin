@@ -19,7 +19,7 @@ class User {
     const unfavoriteIndex = this.favorites.findIndex(favoritedRecipe => {
       return favoritedRecipe.recipe.id === id;
     });
-    this.favorites.splice(unfavoriteIndex, 1);
+    this.favorites.splice((unfavoriteIndex - 1), 1);
   }
 
   filterFavoriteTags(tag) {
@@ -55,7 +55,6 @@ class User {
     const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients
     const pantryData = this.userData.pantry.map(pantry => pantry.ingredient)
 
-    // iterate through recipe ingredients and see if it exists in pantry. if it does but doesn't have enough, push it to the ingredients needed array
     this.userData.pantry.forEach(pantryIngredient => {
       recipeObj.forEach(recipeIngredient => {
         if ((pantryIngredient.ingredient === recipeIngredient.id) && (pantryIngredient.amount < recipeIngredient.quantity.amount)) {
@@ -64,30 +63,18 @@ class User {
       })
     })
 
-    // iterate through recipe ingredients and see if it exists in pantry. if it does but doesn't have enough, push it to the ingredients needed array
     recipeObj.forEach(recipeIngredient => {
       if (!pantryData.includes(recipeIngredient.id)) {
         ingredientsNeededById.push(recipeIngredient.id)
       }
     })
 
-    // turn the ingredient IDs into the names
     const ingredientsNeededByName = ingredientsNeededById.map(ingredientId => {
       return ingredientData.getIngredientName(ingredientId)
     })
 
     return ingredientsNeededByName
   }
-
-// pantry is an array of objects
-  // have a function that takes in a recipe param and finds the ingredients amount of that recipe and reduces our pantry by those amounts
-  // removeRecipeIngredientsFromPantry(recipeId, recipeRepository) {
-  //   const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients
-  //
-  //   const pantryData = this.userData.pantry.map(pantry => pantry.ingredient)
-  //   console.log("pantry: ", pantryData)
-  // }
-
 };
 
 

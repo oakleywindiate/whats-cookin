@@ -218,10 +218,17 @@ input:focus {
   display: flex;
 }
 
-.ingredients-needed {
+.ingredients-needed,
+.api-error,
+.error-message {
   color: red;
   font-weight: bold;
   text-align: center;
+}
+
+.api-error,
+.error-message {
+font-family: 'Lekton', sans-serif;
 }
 
 .hidden {

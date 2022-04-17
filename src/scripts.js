@@ -2,7 +2,7 @@
 
 import './styles.css';
 import apiCalls from './apiCalls';
-import {getFetch, addIngredients, removeIngredients} from './apiCalls.js'
+import {getFetch, addIngredients, removeIngredients, errorMessage} from './apiCalls.js'
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import Ingredient from './classes/Ingredient';
@@ -90,48 +90,40 @@ const getApiData = () => {
   });
 };
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const newIngredient = {
-    userID: parseInt(formData.get('userId')),
-    ingredientID: parseInt(formData.get('ingredientId')),
-    ingredientModification: parseInt(formData.get('ingredientModification'))
-  };
-  console.log(newIngredient.userID)
-  addIngredients(newIngredient);
-  e.target.reset();
-  refreshPantry(newIngredient.userID)
-});
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
+  errorMessage.innerText = '';
   const formData = new FormData(e.target);
+  const ingredientId = findIngredient(formData.get('ingredientId'))
   const newIngredient = {
-    userID: parseInt(formData.get('userId')),
-    ingredientID: parseInt(formData.get('ingredientId')),
+    userID: parseInt(user.userData.id),
+    ingredientID: parseInt(ingredientId),
     ingredientModification: parseInt(formData.get('ingredientModification'))
   };
-  console.log(newIngredient.userID)
-  addIngredients(newIngredient);
+  if (ingredientId) {
+    addIngredients(newIngredient);
+    refreshPantry(newIngredient.userID)
+  } else if (!ingredientId) {
+    errorMessage.innerText = "Sorry, that ingredient does not exist!"
+  }
   e.target.reset();
-  refreshPantry(newIngredient.userID)
 });
 
-
-
+const findIngredient = (input) => {
+  const searchName = ingredientList.ingredientData.find(ingredient => {
+    return ingredient.name === input
+  })
+  if (searchName) {
+    return searchName.id
+  }
+}
 
 viewRecipesToCook.addEventListener('click', (e) => {
   let recipeId = e.target.getAttribute('id');
   const recipeIngredients = findRecipeId(recipeId).recipe.ingredients;
 
-
-
-  //input: recipe ingredients objects
-  //iterate through and post removal of each ingredient and amount from pantry using a for each
-
   if (event.target.className === "cook-recipe-button") {
-    console.log(recipeIngredients)
     recipeIngredients.forEach(ingredient => {
       const removeIngredient = {
         userID: parseInt(user.userData.id),
@@ -139,13 +131,10 @@ viewRecipesToCook.addEventListener('click', (e) => {
         ingredientModification: -parseInt(ingredient.quantity.amount)
       }
       removeIngredients(removeIngredient)
+      rtcModal.style.display = 'none';
+      //remove modal
     })
   }
-
-
-  //
-  //   user.removeIngredients()
-  // }
 })
 
 
@@ -158,7 +147,6 @@ const refreshPantry = (userId) => {
     getFetch('recipes')
   ]).then(data => {
     refreshDataInstances(data, userId)
-
   })
 }
 
@@ -166,46 +154,26 @@ const createDataInstances = (data) => {
   ingredientList = new Ingredient(data[1]);
   recipeList = new RecipeRepository(data[2]);
   userList = new UserRepository(data[0]);
-  // user = getRandomUser(userList.userObjects);
-  user = userList.userObjects[0]
-  console.log(user);
+  user = getRandomUser(userList.userObjects);
 };
-
-
 
 const refreshDataInstances = (data, userId) => {
   getFetch('users')
   ingredientList = new Ingredient(data[1]);
   recipeList = new RecipeRepository(data[2]);
   userList = new UserRepository(data[0]);
-  console.log("userList", userList)
-  console.log("userListId", userList.userData.id)
-  console.log("userListObjects", userList.userObjects)
-  console.log("userId", userId)
   const findUser = () => {
-    // const returnUser = userList.find(user => {
-    //   userList.userData.forEach(id => console.log(id))
-    // })
-    // return returnUser
     userList.userObjects.forEach(user1 => {
       if (user1.userData.id === userId) {
-        console.log("user1", user1)
         user.userData.pantry = user1.userData.pantry
       }
     })
-    console.log("updated user", user)
   }
-
-  // iterate over userList.userData to see where
   findUser();
-
-  // console.log(user);
 };
 
 const displayPantryIngredients = () => {
-  console.log("displaypantryuser", ingredientList)
   let pantryData = user.getPantryInfo(ingredientList)
-  console.log(pantryData);
   pantryList.innerHTML = "";
     pantryData.forEach(ingredient => {
       pantryList.innerHTML += `
@@ -248,21 +216,14 @@ const displayRecipe = (id, recipeElement, heartElement, rtcElement) => {
   rtcElement.innerHTML += `<button class="addRecipeToCook-button" id=${recipeInfo.recipe.id}>+</button>`;
 };
 
-
-// if recipe element is RTC, then add html to RTC modal
-
 const checkPantryInfo = (recipeId, recipeRepository, ingredientData) => {
   const ingredientsNeeded = user.determineIngredientsNeeded(recipeId, recipeRepository, ingredientData);
-  // 2 scenarios
   if (ingredientsNeeded.length) {
-    // inject p into modal saying you are missing x, y, ingredients
     viewRecipesToCook.innerHTML += `
     <p class="ingredients-needed">Oops! You don't have enough ingredients to cook this meal 😭 You need ${ingredientsNeeded.join(', ')}.</p>`
   } else {
     viewRecipesToCook.innerHTML += `<button class="cook-recipe-button" id=${recipeId}>COOK RECIPE</button>`
   }
-  console.log(ingredientsNeeded);
-  console.log(findRecipeId(recipeId));
 };
 
 const searchByTagOrName = (input) => {
@@ -439,7 +400,6 @@ rtcButtonList.addEventListener('click', (e) => {
   let targetId = e.target.getAttribute('id');
   displayRecipe(targetId, viewRecipesToCook, rtcHeartButton, rtcRtcButton);
   checkPantryInfo(targetId, recipeList, ingredientList);
-  // call RTC pantry function
   rtcModal.style.display = 'block';
 });
 
@@ -471,7 +431,7 @@ addIngredientsButton.addEventListener('click', (e) => {
 pantryClose.addEventListener('click', (e) => {
   pantryModal.style.display = 'none';
   displayPantryIngredients()
+  errorMessage.innerText = ''
 });
-
 
 export default refreshPantry;
