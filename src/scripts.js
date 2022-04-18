@@ -80,7 +80,6 @@ const getRandomUser = (array) => {
   return user;
 };
 
-
 const getApiData = () => {
   Promise.all([
     getFetch('users'),
@@ -92,7 +91,6 @@ const getApiData = () => {
   });
 };
 
-
 const refreshPantry = (userId) => {
   Promise.all([
     getFetch('users'),
@@ -103,8 +101,6 @@ const refreshPantry = (userId) => {
   })
 };
 
-
-
 const findIngredient = (input) => {
   const searchName = ingredientList.ingredientData.find(ingredient => {
     return ingredient.name === input
@@ -114,14 +110,12 @@ const findIngredient = (input) => {
   }
 };
 
-
 const createDataInstances = (data) => {
   ingredientList = new Ingredient(data[1]);
   recipeList = new RecipeRepository(data[2]);
   userList = new UserRepository(data[0]);
   user = getRandomUser(userList.userObjects);
 };
-
 
 const refreshDataInstances = (data, userId) => {
   getFetch('users')
@@ -138,7 +132,6 @@ const refreshDataInstances = (data, userId) => {
   findUser();
 };
 
-
 const findRecipeId = (id) => {
   const filterRecipe = recipeList.recipe.find(recipe => {
     let stringifyId = recipe.recipe.id.toString();
@@ -147,11 +140,9 @@ const findRecipeId = (id) => {
   return filterRecipe;
 };
 
-
 const showElement = (element) => {
   element.classList.remove('hidden');
 };
-
 
 const hideElement = (element) => {
   element.classList.add('hidden');
@@ -178,8 +169,6 @@ form.addEventListener('submit', (e) => {
   }
   e.target.reset();
 });
-
-
 
 viewRecipesToCook.addEventListener('click', (e) => {
   let recipeId = e.target.getAttribute('id');

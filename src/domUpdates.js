@@ -96,6 +96,7 @@ const searchFavoritesByTagOrName = (input) => {
       <img class="display-picture" src="${taggedRecipe.recipe.image}" alt="${taggedRecipe.recipe.name}">
       </button>`;
   });
+  
   const getRecipeByName = searchName.map(namedRecipe => {
     favoritesButtonList.innerHTML = '';
     searchedFavorites.innerHTML += `
