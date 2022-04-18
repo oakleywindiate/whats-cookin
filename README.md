@@ -2,7 +2,7 @@
 
 ## Overview
 
-In the mood to cook, but don't know what to make? What's Cookin is an application which allows users to access a recipe repository. Users can search recipes based on name or type of meal, and add those recipes either to a list of favorites or to a list of recipes to cook.
+In the mood to cook, but don't know what to make? What's Cookin' is an application which allows users to access a recipe repository. Users can search recipes based on name or type of meal, and add those recipes either to a list of favorites or to a list of recipes to cook.
 
 This application was created by Nikki Balmoori, Rachel Hill and Oakley Windiate during our second module of the Front-End Engineering program at Turing School of Software & Design. The spec for this project can be found [here](https://frontend.turing.edu/projects/whats-cookin-part-one.html).
 
@@ -34,6 +34,18 @@ To access the application locally:
 
 ![add recipes to cook giphy](./assets/add-recipes-to-cook.gif)
 
+- A user can view the ingredients in their pantry by selecting "My Pantry" on the home page
+
+![my pantry giphy](./assets/my-pantry.gif)
+
+- When viewing your recipes to cook, you will be told if you have enough ingredients in your pantry to cook the meal.
+
+![cook recipe giphy](./assets/cook-recipe.gif)
+
+- If you want to add ingredients, click "add ingredients" on your pantry page and fill out the form.  
+
+![add ingredients giphy](./assets/add-ingredients.gif)
+
 ## Technologies Used
 - JavaScript
 - CSS
@@ -47,6 +59,6 @@ To access the application locally:
 
 ## Challenges & Wins
 - This was our first experience building processes with <b>Webpack</b>
-- It was also our first experience implementing <b>fetch API</b> to access remote data
+- It was also our first experience implementing <b>fetch API</b> and <b>post API</b> to access remote data
 - We gained experience with <b>Test Driven Development</b> by writing tests
 - We also gained experience <b>collaborating</b> with other developers, ensuring the learning and development of each group member
