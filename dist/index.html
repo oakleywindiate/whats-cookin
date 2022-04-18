@@ -20,9 +20,9 @@
       </section>
       <section class="menu-section">
         <button class="clear-search-button hidden">CLEAR SEARCH</button>
-        <button class="favorites-button">FAVORITE RECIPES</button>
-        <button class="recipes-to-cook-button">RECIPES TO COOK</button>
-        <button class="my-pantry-button">MY PANTRY</button>
+        <button aria-label="Access your list of favorited recipes"class="favorites-button">FAVORITE RECIPES</button>
+        <button aria-label="Access your list of recipes you would like to cook"class="recipes-to-cook-button">RECIPES TO COOK</button>
+        <button aria-label="Access your pantry to view your ingredients"class="my-pantry-button">MY PANTRY</button>
       </section>
       </nav>
       <main>
@@ -63,7 +63,7 @@
         </div>
       </section>
       <section class="favorites-home-button">
-        <button class="home-button">Home</button>
+        <button aria-label="return to the home menu"class="home-button">Home</button>
       </section>
       </nav>
       <main>
@@ -112,7 +112,7 @@
         </div>
       </section> -->
       <section class="rtc-home-button-container">
-        <button class="rtc-home-button">Home</button>
+        <button aria-label="return to the home menu"class="rtc-home-button">Home</button>
       </section>
       </nav>
       <main>
@@ -156,7 +156,7 @@
     <!-- MY PANTRY PAGE -->
     <section class="my-pantry-wrapper hidden">
       <nav>
-        <h1>Whats Cookin?</h1>
+        <h1>What's Cookin'?</h1>
           <!-- <section class="rtc-search-bar-container">
             <div class="rtc-search-bar">
               <input type="text" class="rtc-search-input" placeholder="Search your recipes to cook...">
@@ -164,7 +164,7 @@
           </section> -->
         <section class="pantry-home-button-container">
           <button class="pantry-home-button">Home</button>
-          <button class="add-pantry-ingredients-button">Add Ingredients</button>
+          <button aria-label="Fill out this add ingredients form to add ingredients to your pantry"class="add-pantry-ingredients-button">Add Ingredients</button>
         </section>
       </nav>
       <main>
@@ -187,7 +187,7 @@
                   <label for="ingredientModification">Ingredient Modification:</label>
                   <input type="text" id="ingredientModification" placeholder="Enter the ingredient amount to add to your pantry here"name="ingredientModification" required>
                 </div>
-                <input type="submit" value="Submit!">
+                <input aria-label="Submit the ingredients you need"type="submit" value="Submit!">
                 <p class="error-message"></p>
               </form>
             </section>

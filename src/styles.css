@@ -64,6 +64,7 @@ input:focus {
 .clear-search-button,
 .my-pantry-button,
 .pantry-home-button,
+.cook-recipe-button,
 .add-pantry-ingredients-button {
   padding: 15px;
   margin: 25px;
@@ -71,6 +72,10 @@ input:focus {
   font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   background-color: #356859;
+}
+
+.cook-recipe-button {
+  display: flex;
 }
 
 .heart-rtc-buttons-container {
@@ -216,6 +221,45 @@ input:focus {
   background-color: #FFFBE6;
   font-size: 40px;
   display: flex;
+}
+
+.pantry-list {
+  display: flex;
+  list-style: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+
+}
+
+.pantry-ingredient-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 20px;
+  border: 3px solid #356859;
+  margin: 5px;
+  background-color: #FFFBE6;
+}
+
+.rtc-heart-button-container,
+.rtc-rtc-button-container {
+  display: none;
+}
+
+.pantry-ingredient-title {
+  font-family: 'Lekton', sans-serif;
+  color: #F95624;
+  font-size: 25px;
+}
+
+.pantry-ingredient-amount {
+  font-family: 'Montserrat', sans-serif;
+  color: #356859;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .ingredients-needed,
