@@ -1,4 +1,4 @@
-import refreshPantry from './scripts.js';
+import {refreshPantry} from './scripts.js';
 
 const errorMessage = document.querySelector('.error-message');
 const apiErrorMessage = document.querySelector('.api-error');
