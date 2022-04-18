@@ -2,20 +2,18 @@
 
 import {showElement, hideElement, viewRecipesToCook, recipeList, recipeButtonList, findRecipeId, ingredientList, userList, user, refreshPantry, pantryList, rtcButtonList, favoritesButtonList, searchedRecipes, clearSearchButton, searchedFavorites} from './scripts.js';
 
-
 // ----------------- FUNCTIONS ----------------- //
 
-
 const displayPantryIngredients = () => {
-  let pantryData = user.getPantryInfo(ingredientList)
+  let pantryData = user.getPantryInfo(ingredientList);
   pantryList.innerHTML = "";
-    pantryData.forEach(ingredient => {
-      pantryList.innerHTML += `
-        <li class="pantry-ingredient-info">
-          <h3 class="pantry-ingredient-title">${ingredient.name}</h3>
-          <p class="pantry-ingredient-amount">Amount: ${ingredient.amount}</p>
-        </li>`
-    })
+  pantryData.forEach(ingredient => {
+    pantryList.innerHTML += `
+      <li class="pantry-ingredient-info">
+        <h3 class="pantry-ingredient-title">${ingredient.name}</h3>
+        <p class="pantry-ingredient-amount">Amount: ${ingredient.amount}</p>
+      </li>`
+  });
 };
 
 const createRecipeList = () => {
@@ -49,15 +47,15 @@ const checkPantryInfo = (recipeId, recipeRepository, ingredientData) => {
     <p class="ingredients-needed">Oops! You don't have enough ingredients to cook this meal 😭 You need ${ingredientsNeeded.join(', ')}.</p>`
   } else {
     viewRecipesToCook.innerHTML += `<button class="cook-recipe-button" id=${recipeId}>COOK RECIPE</button>`
-  }
+  };
 };
 
 const searchByTagOrName = (input) => {
   const searchTag = recipeList.filterTags(input);
   const searchName = recipeList.filterName(input);
   searchedRecipes.innerHTML = '';
+  recipeButtonList.innerHTML = '';
   const getRecipeByTag = searchTag.map(taggedRecipe => {
-    recipeButtonList.innerHTML = '';
     searchedRecipes.innerHTML += `
       <button class="recipe-list-button" id="${taggedRecipe.id}">
       <h2 class="recipe-titles">${taggedRecipe.name}</h2>
@@ -72,6 +70,9 @@ const searchByTagOrName = (input) => {
       <img class="display-picture" src="${namedRecipe.image}" alt="${namedRecipe.name}">
       </button>`;
   });
+  if (searchTag.length === 0 && searchName.length === 0) {
+    searchedRecipes.innerHTML += `<p class="search-error">No recipes matched your search!</p>`
+  };
   showElement(clearSearchButton);
 };
 
@@ -96,7 +97,6 @@ const searchFavoritesByTagOrName = (input) => {
       <img class="display-picture" src="${taggedRecipe.recipe.image}" alt="${taggedRecipe.recipe.name}">
       </button>`;
   });
-  
   const getRecipeByName = searchName.map(namedRecipe => {
     favoritesButtonList.innerHTML = '';
     searchedFavorites.innerHTML += `
@@ -105,6 +105,9 @@ const searchFavoritesByTagOrName = (input) => {
       <img class="display-picture" src="${namedRecipe.recipe.image}" alt="${namedRecipe.recipe.name}">
       </button>`;
   });
+  if (searchTag.length === 0 && searchName.length === 0) {
+    searchedFavorites.innerHTML += `<p class="search-error">No recipes matched your search!</p>`
+  };
 };
 
 const createRecipesToCookList = () => {
@@ -119,4 +122,4 @@ const createRecipesToCookList = () => {
 
 // ----------------- EXPORTS ----------------- //
 
- export {viewRecipesToCook, displayPantryIngredients, createRecipeList, displayRecipe, checkPantryInfo, searchByTagOrName, createFavoritesList, searchFavoritesByTagOrName, createRecipesToCookList}
+ export {viewRecipesToCook, displayPantryIngredients, createRecipeList, displayRecipe, checkPantryInfo, searchByTagOrName, createFavoritesList, searchFavoritesByTagOrName, createRecipesToCookList};

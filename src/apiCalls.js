@@ -17,7 +17,6 @@ const addIngredients = (newIngredient) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newIngredient)
   })
-  //if the response returns back ok, then get fetch user recipeInfo
   .then(response => {
     if (!response.ok) {
       throw Error()
@@ -28,8 +27,8 @@ const addIngredients = (newIngredient) => {
   .then(response => refreshPantry(newIngredient.userID))
   .catch(error => {
     showError('There was an issue adding this ingredient. Try again!')
-  })
-}
+  });
+};
 
 const removeIngredients = (newIngredient) => {
   fetch("http://localhost:3001/api/v1/users", {
@@ -37,7 +36,6 @@ const removeIngredients = (newIngredient) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(newIngredient)
   })
-  //if the response returns back ok, then get fetch user recipeInfo
   .then(response => {
     if (!response.ok) {
       throw Error(response.statusText)
@@ -48,11 +46,11 @@ const removeIngredients = (newIngredient) => {
   .then(response => refreshPantry(newIngredient.userID))
   .catch(error => {
     showError('There was an issue adding this ingredient. Try again!')
-  })
-}
+  });
+};
 
 const showError = (message) => {
-  errorMessage.innerText = message
-}
+  errorMessage.innerText = message;
+};
 
 export {getFetch, addIngredients, removeIngredients, errorMessage};

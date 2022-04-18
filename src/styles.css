@@ -264,6 +264,7 @@ input:focus {
 
 .ingredients-needed,
 .api-error,
+.search-error,
 .error-message {
   color: red;
   font-weight: bold;
@@ -271,6 +272,7 @@ input:focus {
 }
 
 .api-error,
+.search-error,
 .error-message {
 font-family: 'Lekton', sans-serif;
 }

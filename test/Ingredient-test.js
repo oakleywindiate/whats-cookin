@@ -1,37 +1,20 @@
 import { expect } from 'chai';
 import Ingredient from '../src/classes/Ingredient';
+import { ingredientsData } from './test-data'
+
 
 describe('Ingredient', () => {
-  let ingredientsData, ingredient1;
+  let ingredient1;
 
   beforeEach(() => {
-    ingredientsData = [
-        {
-          "id": 1,
-          "name": "wheat flour",
-          "estimatedCostInCents": 142
-        },
-        {
-          "id": 2,
-          "name": "bicarbonate of soda",
-          "estimatedCostInCents": 582
-        },
-        {
-          "id": 3,
-          "name": "eggs",
-          "estimatedCostInCents": 472
-        }
-      ];
-
     ingredient1 = new Ingredient(ingredientsData)
-
   });
 
-  it('Should be a function', () => {
+  it('should be a function', () => {
     expect(Ingredient).to.be.a('function');
   });
 
-  it('should be an instance of a Ingredient', () => {
+  it('should be an instance of an Ingredient', () => {
     expect(ingredient1).to.be.an.instanceof(Ingredient);
   });
 

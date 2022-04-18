@@ -1,59 +1,16 @@
 import { expect } from 'chai';
 import UserRepository from '../src/classes/UserRepository';
 import User from '../src/classes/User';
+import { usersData } from './test-data'
 
 describe('UserRepository', () => {
-  let usersData, users;
+  let users;
 
   beforeEach(() => {
-    usersData = [
-      {
-        name: "Saige O'Kon",
-        id: 1,
-        pantry: [
-          {
-            "ingredient": 11297,
-            "amount": 4
-          },
-          {
-            "ingredient": 1082047,
-            "amount": 10
-          }
-        ]
-      },
-      {
-        name: "Ephraim Goyette",
-        id: 2,
-        pantry: [
-          {
-            "ingredient": 6150,
-            "amount": 3
-          },
-          {
-            "ingredient": 1032009,
-            "amount": 7
-          }
-        ]
-      },
-      {
-        name: "Nelda Bosco",
-        id: 3,
-        pantry: [
-          {
-            "ingredient": 1009159,
-            "amount": 3
-          },
-          {
-            "ingredient": 19335,
-            "amount": 10
-          }
-        ]
-      },
-    ];
     users = new UserRepository(usersData);
   });
 
-  it('Should be a function', () => {
+  it('should be a function', () => {
     expect(UserRepository).to.be.a('function');
   });
 

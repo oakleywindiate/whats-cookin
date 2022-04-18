@@ -2,7 +2,7 @@
 
 import './styles.css';
 import apiCalls from './apiCalls';
-import {getFetch, addIngredients, removeIngredients, errorMessage} from './apiCalls.js'
+import {getFetch, addIngredients, removeIngredients, errorMessage} from './apiCalls.js';
 import RecipeRepository from './classes/RecipeRepository';
 import Recipe from './classes/Recipe';
 import Ingredient from './classes/Ingredient';
@@ -62,8 +62,7 @@ let addIngredientsButton = document.querySelector('.add-pantry-ingredients-butto
 let pantryModal = document.querySelector('.pantry-modal');
 let pantryClose = document.querySelector('.pantry-close');
 let pantryList = document.querySelector('.pantry-list');
-
-const form = document.querySelector('#pantryForm');
+let form = document.querySelector('#pantryForm');
 
 
 // ----------------- GLOBAL VARIABLES ----------------- //
@@ -103,10 +102,10 @@ const refreshPantry = (userId) => {
 
 const findIngredient = (input) => {
   const searchName = ingredientList.ingredientData.find(ingredient => {
-    return ingredient.name === input
-  })
+    return ingredient.name === input;
+  });
   if (searchName) {
-    return searchName.id
+    return searchName.id;
   }
 };
 
@@ -118,17 +117,17 @@ const createDataInstances = (data) => {
 };
 
 const refreshDataInstances = (data, userId) => {
-  getFetch('users')
+  getFetch('users');
   ingredientList = new Ingredient(data[1]);
   recipeList = new RecipeRepository(data[2]);
   userList = new UserRepository(data[0]);
   const findUser = () => {
     userList.userObjects.forEach(user1 => {
       if (user1.userData.id === userId) {
-        user.userData.pantry = user1.userData.pantry
-      }
-    })
-  }
+        user.userData.pantry = user1.userData.pantry;
+      };
+    });
+  };
   findUser();
 };
 
@@ -155,7 +154,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
   errorMessage.innerText = '';
   const formData = new FormData(e.target);
-  const ingredientId = findIngredient(formData.get('ingredientId'))
+  const ingredientId = findIngredient(formData.get('ingredientId'));
   const newIngredient = {
     userID: parseInt(user.userData.id),
     ingredientID: parseInt(ingredientId),
@@ -163,29 +162,28 @@ form.addEventListener('submit', (e) => {
   };
   if (ingredientId) {
     addIngredients(newIngredient);
-    refreshPantry(newIngredient.userID)
+    refreshPantry(newIngredient.userID);
   } else if (!ingredientId) {
     errorMessage.innerText = "Sorry, that ingredient does not exist!"
-  }
+  };
   e.target.reset();
 });
 
 viewRecipesToCook.addEventListener('click', (e) => {
   let recipeId = e.target.getAttribute('id');
   const recipeIngredients = findRecipeId(recipeId).recipe.ingredients;
-
   if (event.target.className === "cook-recipe-button") {
     recipeIngredients.forEach(ingredient => {
       const removeIngredient = {
         userID: parseInt(user.userData.id),
         ingredientID: parseInt(ingredient.id),
         ingredientModification: -parseInt(ingredient.quantity.amount)
-      }
-      removeIngredients(removeIngredient)
+      };
+      removeIngredients(removeIngredient);
       rtcModal.style.display = 'none';
-    })
-  }
-})
+    });
+  };
+});
 
 
 // ----------------- EVENT LISTENERS ----------------- //
@@ -258,6 +256,7 @@ searchedFavorites.addEventListener('click', (e) => {
 homeButton.addEventListener('click', (e) => {
   hideElement(favoritesPage);
   showElement(mainPage);
+  favoritesSearchInput.value = '';
   searchedFavorites.innerHTML = '';
 });
 
@@ -320,8 +319,8 @@ addIngredientsButton.addEventListener('click', (e) => {
 
 pantryClose.addEventListener('click', (e) => {
   pantryModal.style.display = 'none';
-  displayPantryIngredients()
-  errorMessage.innerText = ''
+  displayPantryIngredients();
+  errorMessage.innerText = '';
 });
 
 // ----------------- EXPORTS ----------------- //

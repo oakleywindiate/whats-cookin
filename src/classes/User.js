@@ -45,37 +45,36 @@ class User {
       return {
         name: ingredientData.getIngredientName(ingredient.ingredient),
         amount: ingredient.amount
-      }
-    })
-    return pantryList
+      };
+    });
+    return pantryList;
   }
 
   determineIngredientsNeeded(recipeId, recipeRepository, ingredientData) {
     const ingredientsNeededById = [];
-    const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients
-    const pantryData = this.userData.pantry.map(pantry => pantry.ingredient)
+    const recipeObj = recipeRepository.findRecipeById(recipeId).recipe.ingredients;
+    const pantryData = this.userData.pantry.map(pantry => pantry.ingredient);
 
     this.userData.pantry.forEach(pantryIngredient => {
       recipeObj.forEach(recipeIngredient => {
         if ((pantryIngredient.ingredient === recipeIngredient.id) && (pantryIngredient.amount < recipeIngredient.quantity.amount)) {
           ingredientsNeededById.push(recipeIngredient.id)
-        }
-      })
-    })
+        };
+      });
+    });
 
     recipeObj.forEach(recipeIngredient => {
       if (!pantryData.includes(recipeIngredient.id)) {
-        ingredientsNeededById.push(recipeIngredient.id)
-      }
-    })
+        ingredientsNeededById.push(recipeIngredient.id);
+      };
+    });
 
     const ingredientsNeededByName = ingredientsNeededById.map(ingredientId => {
-      return ingredientData.getIngredientName(ingredientId)
-    })
+      return ingredientData.getIngredientName(ingredientId);
+    });
 
-    return ingredientsNeededByName
+    return ingredientsNeededByName;
   }
 };
-
 
 export default User;
