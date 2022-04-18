@@ -74,6 +74,10 @@ input:focus {
   background-color: #356859;
 }
 
+.cook-recipe-button {
+  display: flex;
+}
+
 .heart-rtc-buttons-container {
   display: flex;
   justify-content: center;
