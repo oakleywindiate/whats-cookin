@@ -244,6 +244,11 @@ input:focus {
   background-color: #FFFBE6;
 }
 
+.rtc-heart-button-container,
+.rtc-rtc-button-container {
+  display: none;
+}
+
 .pantry-ingredient-title {
   font-family: 'Lekton', sans-serif;
   color: #F95624;

@@ -265,6 +265,7 @@ clearSearchButton.addEventListener('click', (e) => {
   hideElement(clearSearchButton);
   createRecipeList();
   searchInput.value = '';
+  searchedRecipes.innerHTML = '';
 });
 
 viewRtc.addEventListener('click', (e) => {
